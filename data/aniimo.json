@@ -1,0 +1,3471 @@
+{
+    "source":  "https://metabot.gg/en/aniimo/creatures",
+    "generated":  "2026-10-25",
+    "abilities":  [
+                      "Fire",
+                      "Water",
+                      "Grass",
+                      "Earth",
+                      "Lightning",
+                      "Ice",
+                      "Wind",
+                      "Dark",
+                      "Light",
+                      "Hauling",
+                      "Artisanship",
+                      "Leisure",
+                      "Perfumery"
+                  ],
+    "aniimo":  [
+                   {
+                       "id":  "bailite",
+                       "page":  "bailite",
+                       "name":  "Bailite",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "baleetle",
+                       "page":  "baleetle",
+                       "name":  "Baleetle",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "baleetle-snowfield",
+                       "page":  "baleetle",
+                       "name":  "Baleetle",
+                       "form":  "Snowfield Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  1,
+                                         "Ice":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "besauce",
+                       "page":  "besauce",
+                       "name":  "Besauce",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  3,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "blazen",
+                       "page":  "blazen",
+                       "name":  "Blazen",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  3,
+                                         "Artisanship":  3
+                                     }
+                   },
+                   {
+                       "id":  "blazen-mountain-woods",
+                       "page":  "blazen",
+                       "name":  "Blazen",
+                       "form":  "Mountain Woods Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  3,
+                                         "Artisanship":  3
+                                     }
+                   },
+                   {
+                       "id":  "blazen-prismana",
+                       "page":  "blazen",
+                       "name":  "Blazen",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning",
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  4,
+                                         "Artisanship":  4,
+                                         "Dark":  1
+                                     }
+                   },
+                   {
+                       "id":  "bolty",
+                       "page":  "bolty",
+                       "name":  "Bolty",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "bolty-mountain-woods",
+                       "page":  "bolty",
+                       "name":  "Bolty",
+                       "form":  "Mountain Woods Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "bonesky",
+                       "page":  "bonesky",
+                       "name":  "Bonesky",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Ice":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "bonesky-nighttime",
+                       "page":  "bonesky",
+                       "name":  "Bonesky",
+                       "form":  "Nighttime Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Ice",
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Ice":  1,
+                                         "Dark":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "bouldus",
+                       "page":  "bouldus",
+                       "name":  "Bouldus",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "bouldus-snowfield",
+                       "page":  "bouldus",
+                       "name":  "Bouldus",
+                       "form":  "Snowfield Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  3,
+                                         "Hauling":  3,
+                                         "Ice":  2
+                                     }
+                   },
+                   {
+                       "id":  "budclaw",
+                       "page":  "budclaw",
+                       "name":  "Budclaw",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Earth":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "budclaw-bay",
+                       "page":  "budclaw",
+                       "name":  "Budclaw",
+                       "form":  "Bay Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Earth":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "budclaw-beach",
+                       "page":  "budclaw",
+                       "name":  "Budclaw",
+                       "form":  "Beach Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "budclaw-mudflat",
+                       "page":  "budclaw",
+                       "name":  "Budclaw",
+                       "form":  "Mudflat Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Earth":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "budsquire",
+                       "page":  "budsquire",
+                       "name":  "Budsquire",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "budsquire-towerwood",
+                       "page":  "budsquire",
+                       "name":  "Budsquire",
+                       "form":  "Towerwood Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "bulbly",
+                       "page":  "bulbly",
+                       "name":  "Bulbly",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "celestis",
+                       "page":  "celestis",
+                       "name":  "Celestis",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "chirpi",
+                       "page":  "chirpi",
+                       "name":  "Chirpi",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  1
+                                     }
+                   },
+                   {
+                       "id":  "chirpi-beach",
+                       "page":  "chirpi",
+                       "name":  "Chirpi",
+                       "form":  "Beach Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  1,
+                                         "Wind":  1
+                                     }
+                   },
+                   {
+                       "id":  "chirpi-highland",
+                       "page":  "chirpi",
+                       "name":  "Chirpi",
+                       "form":  "Highland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Wind":  1
+                                     }
+                   },
+                   {
+                       "id":  "cornet",
+                       "page":  "cornet",
+                       "name":  "Cornet",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3
+                                     }
+                   },
+                   {
+                       "id":  "cornet-beach",
+                       "page":  "cornet",
+                       "name":  "Cornet",
+                       "form":  "Beach Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Water":  2
+                                     }
+                   },
+                   {
+                       "id":  "cornet-highland",
+                       "page":  "cornet",
+                       "name":  "Cornet",
+                       "form":  "Highland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Grass":  2
+                                     }
+                   },
+                   {
+                       "id":  "cornet-prismana",
+                       "page":  "cornet",
+                       "name":  "Cornet",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  4,
+                                         "Lightning":  1
+                                     }
+                   },
+                   {
+                       "id":  "cozite",
+                       "page":  "cozite",
+                       "name":  "Cozite",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "cubbo",
+                       "page":  "cubbo",
+                       "name":  "Cubbo",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "dazmand",
+                       "page":  "dazmand",
+                       "name":  "Dazmand",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  3,
+                                         "Artisanship":  3
+                                     }
+                   },
+                   {
+                       "id":  "dewy",
+                       "page":  "dewy",
+                       "name":  "Dewy",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  1,
+                                         "Leisure":  1,
+                                         "Perfumery":  1
+                                     }
+                   },
+                   {
+                       "id":  "dreaple",
+                       "page":  "dreaple",
+                       "name":  "Dreaple",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  3,
+                                         "Leisure":  3
+                                     }
+                   },
+                   {
+                       "id":  "eklue",
+                       "page":  "eklue",
+                       "name":  "Eklue",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Artisanship":  3
+                                     }
+                   },
+                   {
+                       "id":  "eko",
+                       "page":  "eko",
+                       "name":  "Eko",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "emberpup",
+                       "page":  "emberpup",
+                       "name":  "Emberpup",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "emberpup-highland",
+                       "page":  "emberpup",
+                       "name":  "Emberpup",
+                       "form":  "Highland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire",
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  1,
+                                         "Earth":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "emberpup-mountain-woods",
+                       "page":  "emberpup",
+                       "name":  "Emberpup",
+                       "form":  "Mountain Woods Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "erlath",
+                       "page":  "erlath",
+                       "name":  "Erlath",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  3
+                                     }
+                   },
+                   {
+                       "id":  "fahloo",
+                       "page":  "fahloo",
+                       "name":  "Fahloo",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  1
+                                     }
+                   },
+                   {
+                       "id":  "fenmane",
+                       "page":  "fenmane",
+                       "name":  "Fenmane",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "fenmane-prismana",
+                       "page":  "fenmane",
+                       "name":  "Fenmane",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning",
+                                        "Light"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  4,
+                                         "Hauling":  3,
+                                         "Light":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "fennelun",
+                       "page":  "fennelun",
+                       "name":  "Fennelun",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Light"
+                                    ],
+                       "abilities":  {
+                                         "Light":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "fenrier",
+                       "page":  "fenrier",
+                       "name":  "Fenrier",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Ice":  2,
+                                         "Hauling":  2
+                                     }
+                   },
+                   {
+                       "id":  "fenrier-nighttime",
+                       "page":  "fenrier",
+                       "name":  "Fenrier",
+                       "form":  "Nighttime Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Ice",
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Ice":  2,
+                                         "Hauling":  2,
+                                         "Dark":  1
+                                     }
+                   },
+                   {
+                       "id":  "fentuft",
+                       "page":  "fentuft",
+                       "name":  "Fentuft",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "flamerion",
+                       "page":  "flamerion",
+                       "name":  "Flamerion",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  3
+                                     }
+                   },
+                   {
+                       "id":  "flamerion-forest",
+                       "page":  "flamerion",
+                       "name":  "Flamerion",
+                       "form":  "Forest Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  3
+                                     }
+                   },
+                   {
+                       "id":  "flamerion-highland",
+                       "page":  "flamerion",
+                       "name":  "Flamerion",
+                       "form":  "Highland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  3
+                                     }
+                   },
+                   {
+                       "id":  "flamerion-sea-of-flowers",
+                       "page":  "flamerion",
+                       "name":  "Flamerion",
+                       "form":  "Sea of Flowers Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  3
+                                     }
+                   },
+                   {
+                       "id":  "flameruff",
+                       "page":  "flameruff",
+                       "name":  "Flameruff",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  2,
+                                         "Hauling":  2
+                                     }
+                   },
+                   {
+                       "id":  "flameruff-highland",
+                       "page":  "flameruff",
+                       "name":  "Flameruff",
+                       "form":  "Highland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire",
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  2,
+                                         "Hauling":  2,
+                                         "Earth":  1
+                                     }
+                   },
+                   {
+                       "id":  "flameruff-mountain-woods",
+                       "page":  "flameruff",
+                       "name":  "Flameruff",
+                       "form":  "Mountain Woods Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  2,
+                                         "Hauling":  2
+                                     }
+                   },
+                   {
+                       "id":  "flutternym",
+                       "page":  "flutternym",
+                       "name":  "Flutternym",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "flutternym-mountain-woods",
+                       "page":  "flutternym",
+                       "name":  "Flutternym",
+                       "form":  "Mountain Woods Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  1,
+                                         "Wind":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "flutternym-nighttime",
+                       "page":  "flutternym",
+                       "name":  "Flutternym",
+                       "form":  "Nighttime Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  1,
+                                         "Dark":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "flutternym-sea-of-flowers",
+                       "page":  "flutternym",
+                       "name":  "Flutternym",
+                       "form":  "Sea of Flowers Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Wind":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "fragrancier",
+                       "page":  "fragrancier",
+                       "name":  "Fragrancier",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  3,
+                                         "Leisure":  3,
+                                         "Perfumery":  3
+                                     }
+                   },
+                   {
+                       "id":  "fulmintis",
+                       "page":  "fulmintis",
+                       "name":  "Fulmintis",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  3,
+                                         "Artisanship":  3
+                                     }
+                   },
+                   {
+                       "id":  "fulmintis-prismana",
+                       "page":  "fulmintis",
+                       "name":  "Fulmintis",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning",
+                                        "Light"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  1,
+                                         "Light":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "geoclaw",
+                       "page":  "geoclaw",
+                       "name":  "Geoclaw",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Ice":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "geodeback",
+                       "page":  "geodeback",
+                       "name":  "Geodeback",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  2,
+                                         "Hauling":  2
+                                     }
+                   },
+                   {
+                       "id":  "glacy",
+                       "page":  "glacy",
+                       "name":  "Glacy",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Water":  3,
+                                         "Hauling":  3,
+                                         "Ice":  2
+                                     }
+                   },
+                   {
+                       "id":  "glacy-prismana",
+                       "page":  "glacy",
+                       "name":  "Glacy",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water",
+                                        "Light"
+                                    ],
+                       "abilities":  {
+                                         "Water":  4,
+                                         "Hauling":  4,
+                                         "Light":  1
+                                     }
+                   },
+                   {
+                       "id":  "glacy-sea-of-flowers",
+                       "page":  "glacy",
+                       "name":  "Glacy",
+                       "form":  "Sea of Flowers Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Water":  3,
+                                         "Hauling":  3,
+                                         "Ice":  2
+                                     }
+                   },
+                   {
+                       "id":  "glacy-snowfield",
+                       "page":  "glacy",
+                       "name":  "Glacy",
+                       "form":  "Snowfield Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Water":  3,
+                                         "Hauling":  3,
+                                         "Ice":  2
+                                     }
+                   },
+                   {
+                       "id":  "glynsera",
+                       "page":  "glynsera",
+                       "name":  "Glynsera",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Ice":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "glynsera-nighttime",
+                       "page":  "glynsera",
+                       "name":  "Glynsera",
+                       "form":  "Nighttime Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Ice",
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Ice":  3,
+                                         "Hauling":  3,
+                                         "Dark":  2
+                                     }
+                   },
+                   {
+                       "id":  "glynsera-prismana",
+                       "page":  "glynsera",
+                       "name":  "Glynsera",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Ice",
+                                        "Light"
+                                    ],
+                       "abilities":  {
+                                         "Ice":  4,
+                                         "Hauling":  4,
+                                         "Light":  1
+                                     }
+                   },
+                   {
+                       "id":  "gracewing",
+                       "page":  "gracewing",
+                       "name":  "Gracewing",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Leisure":  3
+                                     }
+                   },
+                   {
+                       "id":  "gracewing-mountain-woods",
+                       "page":  "gracewing",
+                       "name":  "Gracewing",
+                       "form":  "Mountain Woods Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Leisure":  3,
+                                         "Earth":  2
+                                     }
+                   },
+                   {
+                       "id":  "gracewing-nighttime",
+                       "page":  "gracewing",
+                       "name":  "Gracewing",
+                       "form":  "Nighttime Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Leisure":  3,
+                                         "Dark":  2
+                                     }
+                   },
+                   {
+                       "id":  "gracewing-sea-of-flowers",
+                       "page":  "gracewing",
+                       "name":  "Gracewing",
+                       "form":  "Sea of Flowers Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Leisure":  3,
+                                         "Grass":  2
+                                     }
+                   },
+                   {
+                       "id":  "grizbo",
+                       "page":  "grizbo",
+                       "name":  "Grizbo",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "grizbo-prismana",
+                       "page":  "grizbo",
+                       "name":  "Grizbo",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth",
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  4,
+                                         "Hauling":  4,
+                                         "Dark":  3
+                                     }
+                   },
+                   {
+                       "id":  "helgon",
+                       "page":  "helgon",
+                       "name":  "Helgon",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "helgon-mountain",
+                       "page":  "helgon",
+                       "name":  "Helgon",
+                       "form":  "Mountain Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "helion",
+                       "page":  "helion",
+                       "name":  "Helion",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Light"
+                                    ],
+                       "abilities":  {
+                                         "Light":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "helmut",
+                       "page":  "helmut",
+                       "name":  "Helmut",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "helmut-mountain-woods",
+                       "page":  "helmut",
+                       "name":  "Helmut",
+                       "form":  "Mountain Woods Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "helmut-snowfield",
+                       "page":  "helmut",
+                       "name":  "Helmut",
+                       "form":  "Snowfield Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Ice":  1,
+                                         "Dark":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "helmwhelp",
+                       "page":  "helmwhelp",
+                       "name":  "Helmwhelp",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  2,
+                                         "Hauling":  2
+                                     }
+                   },
+                   {
+                       "id":  "helmwhelp-mountain",
+                       "page":  "helmwhelp",
+                       "name":  "Helmwhelp",
+                       "form":  "Mountain Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  2,
+                                         "Hauling":  2
+                                     }
+                   },
+                   {
+                       "id":  "hexxin",
+                       "page":  "hexxin",
+                       "name":  "Hexxin",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  2,
+                                         "Artisanship":  2,
+                                         "Grass":  1
+                                     }
+                   },
+                   {
+                       "id":  "hexxin-mountain",
+                       "page":  "hexxin",
+                       "name":  "Hexxin",
+                       "form":  "Mountain Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  2,
+                                         "Artisanship":  2,
+                                         "Grass":  1
+                                     }
+                   },
+                   {
+                       "id":  "hexxin-prismana",
+                       "page":  "hexxin",
+                       "name":  "Hexxin",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  4,
+                                         "Artisanship":  4,
+                                         "Grass":  3
+                                     }
+                   },
+                   {
+                       "id":  "hummin",
+                       "page":  "hummin",
+                       "name":  "Hummin",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1
+                                     }
+                   },
+                   {
+                       "id":  "hummin-mountain",
+                       "page":  "hummin",
+                       "name":  "Hummin",
+                       "form":  "Mountain Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1
+                                     }
+                   },
+                   {
+                       "id":  "ignitis",
+                       "page":  "ignitis",
+                       "name":  "Ignitis",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  3,
+                                         "Artisanship":  3
+                                     }
+                   },
+                   {
+                       "id":  "ignitis-forest",
+                       "page":  "ignitis",
+                       "name":  "Ignitis",
+                       "form":  "Forest Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  3,
+                                         "Artisanship":  3,
+                                         "Grass":  2
+                                     }
+                   },
+                   {
+                       "id":  "ignitis-highland",
+                       "page":  "ignitis",
+                       "name":  "Ignitis",
+                       "form":  "Highland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark",
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  3,
+                                         "Artisanship":  3,
+                                         "Fire":  2
+                                     }
+                   },
+                   {
+                       "id":  "ignitis-prismana",
+                       "page":  "ignitis",
+                       "name":  "Ignitis",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark",
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  4,
+                                         "Artisanship":  4,
+                                         "Fire":  3
+                                     }
+                   },
+                   {
+                       "id":  "infergon",
+                       "page":  "infergon",
+                       "name":  "Infergon",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "infergon-prismana",
+                       "page":  "infergon",
+                       "name":  "Infergon",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire",
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  1,
+                                         "Wind":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "infergon-boss",
+                       "page":  "infergon-boss",
+                       "name":  "Infergon BOSS",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  true,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  4
+                                     }
+                   },
+                   {
+                       "id":  "inferlupa",
+                       "page":  "inferlupa",
+                       "name":  "Inferlupa",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark",
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  3,
+                                         "Hauling":  3,
+                                         "Fire":  2
+                                     }
+                   },
+                   {
+                       "id":  "inferlupa-prismana",
+                       "page":  "inferlupa",
+                       "name":  "Inferlupa",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark",
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  4,
+                                         "Hauling":  4,
+                                         "Fire":  3
+                                     }
+                   },
+                   {
+                       "id":  "irelia",
+                       "page":  "irelia",
+                       "name":  "Irelia",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  4
+                                     }
+                   },
+                   {
+                       "id":  "iris",
+                       "page":  "iris",
+                       "name":  "Iris",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "iris-forest",
+                       "page":  "iris",
+                       "name":  "Iris",
+                       "form":  "Forest Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "iris-grassland",
+                       "page":  "iris",
+                       "name":  "Iris",
+                       "form":  "Grassland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "iris-highland",
+                       "page":  "iris",
+                       "name":  "Iris",
+                       "form":  "Highland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "iris-mountain-woods",
+                       "page":  "iris",
+                       "name":  "Iris",
+                       "form":  "Mountain Woods Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "iris-plateau",
+                       "page":  "iris",
+                       "name":  "Iris",
+                       "form":  "Plateau Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "iris-prismana",
+                       "page":  "iris",
+                       "name":  "Iris",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "irisal",
+                       "page":  "irisal",
+                       "name":  "Irisal",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Leisure":  3
+                                     }
+                   },
+                   {
+                       "id":  "irisal-forest",
+                       "page":  "irisal",
+                       "name":  "Irisal",
+                       "form":  "Forest Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Leisure":  3
+                                     }
+                   },
+                   {
+                       "id":  "irisal-grassland",
+                       "page":  "irisal",
+                       "name":  "Irisal",
+                       "form":  "Grassland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Leisure":  3
+                                     }
+                   },
+                   {
+                       "id":  "irisal-highland",
+                       "page":  "irisal",
+                       "name":  "Irisal",
+                       "form":  "Highland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Leisure":  3
+                                     }
+                   },
+                   {
+                       "id":  "irisal-mountain-woods",
+                       "page":  "irisal",
+                       "name":  "Irisal",
+                       "form":  "Mountain Woods Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Leisure":  3
+                                     }
+                   },
+                   {
+                       "id":  "irisal-plateau",
+                       "page":  "irisal",
+                       "name":  "Irisal",
+                       "form":  "Plateau Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Leisure":  3
+                                     }
+                   },
+                   {
+                       "id":  "irisal-prismana",
+                       "page":  "irisal",
+                       "name":  "Irisal",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  4,
+                                         "Leisure":  4
+                                     }
+                   },
+                   {
+                       "id":  "irisalis",
+                       "page":  "irisalis",
+                       "name":  "Irisalis",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  4,
+                                         "Leisure":  4
+                                     }
+                   },
+                   {
+                       "id":  "jabster",
+                       "page":  "jabster",
+                       "name":  "Jabster",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "jawling",
+                       "page":  "jawling",
+                       "name":  "Jawling",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "jawling-mountain",
+                       "page":  "jawling",
+                       "name":  "Jawling",
+                       "form":  "Mountain Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "lavazar",
+                       "page":  "lavazar",
+                       "name":  "Lavazar",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire",
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  2,
+                                         "Earth":  1,
+                                         "Hauling":  2
+                                     }
+                   },
+                   {
+                       "id":  "leafy",
+                       "page":  "leafy",
+                       "name":  "Leafy",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass",
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Water":  2,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "lost-pathfinder",
+                       "page":  "lost-pathfinder",
+                       "name":  "Lost Pathfinder",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  true,
+                       "elements":  [
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  1
+                                     }
+                   },
+                   {
+                       "id":  "luminelle",
+                       "page":  "luminelle",
+                       "name":  "Luminelle",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  3,
+                                         "Artisanship":  3
+                                     }
+                   },
+                   {
+                       "id":  "luminelle-prismana",
+                       "page":  "luminelle",
+                       "name":  "Luminelle",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning",
+                                        "Light"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  1,
+                                         "Light":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "luminelle-rainstorm",
+                       "page":  "luminelle",
+                       "name":  "Luminelle",
+                       "form":  "Rainstorm Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning",
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  1,
+                                         "Lightning":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "lunara",
+                       "page":  "lunara",
+                       "name":  "Lunara",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Light"
+                                    ],
+                       "abilities":  {
+                                         "Light":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "magmarex",
+                       "page":  "magmarex",
+                       "name":  "Magmarex",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire",
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  3,
+                                         "Hauling":  3,
+                                         "Earth":  2
+                                     }
+                   },
+                   {
+                       "id":  "magmarex-basic",
+                       "page":  "magmarex",
+                       "name":  "Magmarex",
+                       "form":  "Basic Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire",
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  3,
+                                         "Earth":  2,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "magmarex-prismana",
+                       "page":  "magmarex",
+                       "name":  "Magmarex",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire",
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  4,
+                                         "Hauling":  4,
+                                         "Dark":  3
+                                     }
+                   },
+                   {
+                       "id":  "melloblum",
+                       "page":  "melloblum",
+                       "name":  "Melloblum",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Artisanship":  3
+                                     }
+                   },
+                   {
+                       "id":  "melloblum-prismana",
+                       "page":  "melloblum",
+                       "name":  "Melloblum",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass",
+                                        "Light"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Light":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "minespine",
+                       "page":  "minespine",
+                       "name":  "Minespine",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "minespine-plateau",
+                       "page":  "minespine",
+                       "name":  "Minespine",
+                       "form":  "Plateau Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Leisure":  3,
+                                         "Ice":  2
+                                     }
+                   },
+                   {
+                       "id":  "nimbi",
+                       "page":  "nimbi",
+                       "name":  "Nimbi",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "nimbi-cloudmist",
+                       "page":  "nimbi",
+                       "name":  "Nimbi",
+                       "form":  "Cloudmist Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "nimbi-plateau",
+                       "page":  "nimbi",
+                       "name":  "Nimbi",
+                       "form":  "Plateau Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Ice":  1,
+                                         "Wind":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "nimbi-rainstorm",
+                       "page":  "nimbi",
+                       "name":  "Nimbi",
+                       "form":  "Rainstorm Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  1,
+                                         "Wind":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "panpanta",
+                       "page":  "panpanta",
+                       "name":  "Panpanta",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  3,
+                                         "Leisure":  3
+                                     }
+                   },
+                   {
+                       "id":  "panpanta-nighttime",
+                       "page":  "panpanta",
+                       "name":  "Panpanta",
+                       "form":  "Nighttime Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  3,
+                                         "Leisure":  3
+                                     }
+                   },
+                   {
+                       "id":  "panpanta-prismana",
+                       "page":  "panpanta",
+                       "name":  "Panpanta",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  4,
+                                         "Leisure":  4
+                                     }
+                   },
+                   {
+                       "id":  "pawney",
+                       "page":  "pawney",
+                       "name":  "Pawney",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "pawney-mountain-woods",
+                       "page":  "pawney",
+                       "name":  "Pawney",
+                       "form":  "Mountain Woods Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "pawney-prismana",
+                       "page":  "pawney",
+                       "name":  "Pawney",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  4,
+                                         "Hauling":  4
+                                     }
+                   },
+                   {
+                       "id":  "pawney-snowfield",
+                       "page":  "pawney",
+                       "name":  "Pawney",
+                       "form":  "Snowfield Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  3,
+                                         "Hauling":  3,
+                                         "Ice":  2
+                                     }
+                   },
+                   {
+                       "id":  "pebbling",
+                       "page":  "pebbling",
+                       "name":  "Pebbling",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "piopiota",
+                       "page":  "piopiota",
+                       "name":  "Piopiota",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  3,
+                                         "Leisure":  3
+                                     }
+                   },
+                   {
+                       "id":  "piopiota-nighttime",
+                       "page":  "piopiota",
+                       "name":  "Piopiota",
+                       "form":  "Nighttime Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water",
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Water":  3,
+                                         "Dark":  2,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "pomawk",
+                       "page":  "pomawk",
+                       "name":  "Pomawk",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Artisanship":  3
+                                     }
+                   },
+                   {
+                       "id":  "pomawk-highland",
+                       "page":  "pomawk",
+                       "name":  "Pomawk",
+                       "form":  "Highland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Artisanship":  3
+                                     }
+                   },
+                   {
+                       "id":  "pomawk-sea-of-flowers",
+                       "page":  "pomawk",
+                       "name":  "Pomawk",
+                       "form":  "Sea of Flowers Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Artisanship":  3
+                                     }
+                   },
+                   {
+                       "id":  "pomawk-snowfield",
+                       "page":  "pomawk",
+                       "name":  "Pomawk",
+                       "form":  "Snowfield Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Artisanship":  3,
+                                         "Ice":  2
+                                     }
+                   },
+                   {
+                       "id":  "pomegg",
+                       "page":  "pomegg",
+                       "name":  "Pomegg",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "pomegg-highland",
+                       "page":  "pomegg",
+                       "name":  "Pomegg",
+                       "form":  "Highland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "pomegg-sea-of-flowers",
+                       "page":  "pomegg",
+                       "name":  "Pomegg",
+                       "form":  "Sea of Flowers Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "pomegg-snowfield",
+                       "page":  "pomegg",
+                       "name":  "Pomegg",
+                       "form":  "Snowfield Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Ice":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "popota",
+                       "page":  "popota",
+                       "name":  "Popota",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  2,
+                                         "Leisure":  2
+                                     }
+                   },
+                   {
+                       "id":  "popota-nighttime",
+                       "page":  "popota",
+                       "name":  "Popota",
+                       "form":  "Nighttime Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  2,
+                                         "Leisure":  2
+                                     }
+                   },
+                   {
+                       "id":  "pranky",
+                       "page":  "pranky",
+                       "name":  "Pranky",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  2,
+                                         "Hauling":  2
+                                     }
+                   },
+                   {
+                       "id":  "pranky-sea-of-flowers",
+                       "page":  "pranky",
+                       "name":  "Pranky",
+                       "form":  "Sea of Flowers Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  2,
+                                         "Hauling":  2
+                                     }
+                   },
+                   {
+                       "id":  "pranky-snowfield",
+                       "page":  "pranky",
+                       "name":  "Pranky",
+                       "form":  "Snowfield Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Water":  2,
+                                         "Hauling":  2,
+                                         "Ice":  1
+                                     }
+                   },
+                   {
+                       "id":  "rookey",
+                       "page":  "rookey",
+                       "name":  "Rookey",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "rookey-mountain-woods",
+                       "page":  "rookey",
+                       "name":  "Rookey",
+                       "form":  "Mountain Woods Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "rookey-snowfield",
+                       "page":  "rookey",
+                       "name":  "Rookey",
+                       "form":  "Snowfield Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  3,
+                                         "Hauling":  3,
+                                         "Ice":  2
+                                     }
+                   },
+                   {
+                       "id":  "scorchhowl",
+                       "page":  "scorchhowl",
+                       "name":  "Scorchhowl",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "scorchhowl-highland",
+                       "page":  "scorchhowl",
+                       "name":  "Scorchhowl",
+                       "form":  "Highland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire",
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  3,
+                                         "Hauling":  3,
+                                         "Earth":  2
+                                     }
+                   },
+                   {
+                       "id":  "scorchhowl-mountain-woods",
+                       "page":  "scorchhowl",
+                       "name":  "Scorchhowl",
+                       "form":  "Mountain Woods Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "scorchhowl-prismana",
+                       "page":  "scorchhowl",
+                       "name":  "Scorchhowl",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  4,
+                                         "Hauling":  4
+                                     }
+                   },
+                   {
+                       "id":  "scorchhowl-thunderstorm",
+                       "page":  "scorchhowl",
+                       "name":  "Scorchhowl",
+                       "form":  "Thunderstorm Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire",
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Hauling":  3,
+                                         "Lightning":  2,
+                                         "Fire":  1
+                                     }
+                   },
+                   {
+                       "id":  "sheldon",
+                       "page":  "sheldon",
+                       "name":  "Sheldon",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  2,
+                                         "Leisure":  2
+                                     }
+                   },
+                   {
+                       "id":  "shelly",
+                       "page":  "shelly",
+                       "name":  "Shelly",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "shelly-basic",
+                       "page":  "shelly",
+                       "name":  "Shelly",
+                       "form":  "Basic Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "sherro",
+                       "page":  "sherro",
+                       "name":  "Sherro",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  3,
+                                         "Leisure":  3
+                                     }
+                   },
+                   {
+                       "id":  "sherro-prismana",
+                       "page":  "sherro",
+                       "name":  "Sherro",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water",
+                                        "Light"
+                                    ],
+                       "abilities":  {
+                                         "Water":  4,
+                                         "Leisure":  4,
+                                         "Light":  1
+                                     }
+                   },
+                   {
+                       "id":  "sherro-thunderstorm",
+                       "page":  "sherro",
+                       "name":  "Sherro",
+                       "form":  "Thunderstorm Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water",
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  2,
+                                         "Water":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "shrubclaw",
+                       "page":  "shrubclaw",
+                       "name":  "Shrubclaw",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  3,
+                                         "Hauling":  3,
+                                         "Grass":  2
+                                     }
+                   },
+                   {
+                       "id":  "shrubclaw-bay",
+                       "page":  "shrubclaw",
+                       "name":  "Shrubclaw",
+                       "form":  "Bay Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  3,
+                                         "Hauling":  3,
+                                         "Grass":  2
+                                     }
+                   },
+                   {
+                       "id":  "shrubclaw-beach",
+                       "page":  "shrubclaw",
+                       "name":  "Shrubclaw",
+                       "form":  "Beach Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  3,
+                                         "Hauling":  3,
+                                         "Grass":  2
+                                     }
+                   },
+                   {
+                       "id":  "shrubclaw-mudflat",
+                       "page":  "shrubclaw",
+                       "name":  "Shrubclaw",
+                       "form":  "Mudflat Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "skippy",
+                       "page":  "skippy",
+                       "name":  "Skippy",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "skippy-sea-of-flowers",
+                       "page":  "skippy",
+                       "name":  "Skippy",
+                       "form":  "Sea of Flowers Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "skippy-snowfield",
+                       "page":  "skippy",
+                       "name":  "Skippy",
+                       "form":  "Snowfield Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Water":  1,
+                                         "Ice":  1,
+                                         "Hauling":  1
+                                     }
+                   },
+                   {
+                       "id":  "soleon",
+                       "page":  "soleon",
+                       "name":  "Soleon",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Light"
+                                    ],
+                       "abilities":  {
+                                         "Light":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "somniwing",
+                       "page":  "somniwing",
+                       "name":  "Somniwing",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass",
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  4,
+                                         "Wind":  3,
+                                         "Leisure":  4
+                                     }
+                   },
+                   {
+                       "id":  "sparkelf",
+                       "page":  "sparkelf",
+                       "name":  "Sparkelf",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  3
+                                     }
+                   },
+                   {
+                       "id":  "sparkelf-prismana",
+                       "page":  "sparkelf",
+                       "name":  "Sparkelf",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  4
+                                     }
+                   },
+                   {
+                       "id":  "sparki",
+                       "page":  "sparki",
+                       "name":  "Sparki",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  2
+                                     }
+                   },
+                   {
+                       "id":  "sparki-forest",
+                       "page":  "sparki",
+                       "name":  "Sparki",
+                       "form":  "Forest Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  2
+                                     }
+                   },
+                   {
+                       "id":  "sparki-highland",
+                       "page":  "sparki",
+                       "name":  "Sparki",
+                       "form":  "Highland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  2
+                                     }
+                   },
+                   {
+                       "id":  "sparki-sea-of-flowers",
+                       "page":  "sparki",
+                       "name":  "Sparki",
+                       "form":  "Sea of Flowers Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  2
+                                     }
+                   },
+                   {
+                       "id":  "squarrel",
+                       "page":  "squarrel",
+                       "name":  "Squarrel",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "squashel",
+                       "page":  "squashel",
+                       "name":  "Squashel",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  2,
+                                         "Artisanship":  2
+                                     }
+                   },
+                   {
+                       "id":  "stellarys",
+                       "page":  "stellarys",
+                       "name":  "Stellarys",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  3,
+                                         "Leisure":  3
+                                     }
+                   },
+                   {
+                       "id":  "stellarys-prismana",
+                       "page":  "stellarys",
+                       "name":  "Stellarys",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  4,
+                                         "Leisure":  4,
+                                         "Ice":  1
+                                     }
+                   },
+                   {
+                       "id":  "stellarys-rainstorm",
+                       "page":  "stellarys",
+                       "name":  "Stellarys",
+                       "form":  "Rainstorm Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark",
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  3,
+                                         "Water":  2,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "susuta",
+                       "page":  "susuta",
+                       "name":  "Susuta",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "susuta-basic",
+                       "page":  "susuta",
+                       "name":  "Susuta",
+                       "form":  "Basic Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "susuta-nighttime",
+                       "page":  "susuta",
+                       "name":  "Susuta",
+                       "form":  "Nighttime Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Water":  1,
+                                         "Leisure":  1
+                                     }
+                   },
+                   {
+                       "id":  "thornblade",
+                       "page":  "thornblade",
+                       "name":  "Thornblade",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Artisanship":  3
+                                     }
+                   },
+                   {
+                       "id":  "thornblade-prismana",
+                       "page":  "thornblade",
+                       "name":  "Thornblade",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass",
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Water":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "thornblade-thunderstorm",
+                       "page":  "thornblade",
+                       "name":  "Thornblade",
+                       "form":  "Thunderstorm Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass",
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Lightning":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "thornblade-towerwood",
+                       "page":  "thornblade",
+                       "name":  "Thornblade",
+                       "form":  "Towerwood Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Artisanship":  3
+                                     }
+                   },
+                   {
+                       "id":  "tromber",
+                       "page":  "tromber",
+                       "name":  "Tromber",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3
+                                     }
+                   },
+                   {
+                       "id":  "tromber-beach",
+                       "page":  "tromber",
+                       "name":  "Tromber",
+                       "form":  "Beach Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Water":  2
+                                     }
+                   },
+                   {
+                       "id":  "tromber-highland",
+                       "page":  "tromber",
+                       "name":  "Tromber",
+                       "form":  "Highland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Grass":  2
+                                     }
+                   },
+                   {
+                       "id":  "tubster",
+                       "page":  "tubster",
+                       "name":  "Tubster",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3
+                                     }
+                   },
+                   {
+                       "id":  "tubster-basic",
+                       "page":  "tubster",
+                       "name":  "Tubster",
+                       "form":  "Basic Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3
+                                     }
+                   },
+                   {
+                       "id":  "tubster-beach",
+                       "page":  "tubster",
+                       "name":  "Tubster",
+                       "form":  "Beach Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Water"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Water":  2
+                                     }
+                   },
+                   {
+                       "id":  "tubster-highland",
+                       "page":  "tubster",
+                       "name":  "Tubster",
+                       "form":  "Highland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Grass":  2
+                                     }
+                   },
+                   {
+                       "id":  "tuckin",
+                       "page":  "tuckin",
+                       "name":  "Tuckin",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "tuckin-90207",
+                       "page":  "tuckin-90207",
+                       "name":  "Tuckin",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  true,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  4
+                                     }
+                   },
+                   {
+                       "id":  "tuckin-basic",
+                       "page":  "tuckin",
+                       "name":  "Tuckin",
+                       "form":  "Basic Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Artisanship":  3
+                                     }
+                   },
+                   {
+                       "id":  "tuckin-mountain",
+                       "page":  "tuckin",
+                       "name":  "Tuckin",
+                       "form":  "Mountain Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Grass",
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  3,
+                                         "Hauling":  3,
+                                         "Earth":  2
+                                     }
+                   },
+                   {
+                       "id":  "turbo",
+                       "page":  "turbo",
+                       "name":  "Turbo",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Leisure":  3
+                                     }
+                   },
+                   {
+                       "id":  "turbo-cloudmist",
+                       "page":  "turbo",
+                       "name":  "Turbo",
+                       "form":  "Cloudmist Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Leisure":  3
+                                     }
+                   },
+                   {
+                       "id":  "turbo-plateau",
+                       "page":  "turbo",
+                       "name":  "Turbo",
+                       "form":  "Plateau Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Leisure":  3,
+                                         "Ice":  2
+                                     }
+                   },
+                   {
+                       "id":  "turbo-prismana",
+                       "page":  "turbo",
+                       "name":  "Turbo",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  4,
+                                         "Leisure":  4,
+                                         "Dark":  3
+                                     }
+                   },
+                   {
+                       "id":  "turbo-rainstorm",
+                       "page":  "turbo",
+                       "name":  "Turbo",
+                       "form":  "Rainstorm Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Wind",
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Wind":  3,
+                                         "Leisure":  3,
+                                         "Lightning":  2
+                                     }
+                   },
+                   {
+                       "id":  "veilfloat",
+                       "page":  "veilfloat",
+                       "name":  "Veilfloat",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Lightning"
+                                    ],
+                       "abilities":  {
+                                         "Lightning":  2,
+                                         "Artisanship":  2
+                                     }
+                   },
+                   {
+                       "id":  "waleetle",
+                       "page":  "waleetle",
+                       "name":  "Waleetle",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  3,
+                                         "Hauling":  3
+                                     }
+                   },
+                   {
+                       "id":  "waleetle-prismana",
+                       "page":  "waleetle",
+                       "name":  "Waleetle",
+                       "form":  "Prismana",
+                       "prismana":  true,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth",
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  4,
+                                         "Hauling":  4,
+                                         "Dark":  3
+                                     }
+                   },
+                   {
+                       "id":  "waleetle-snowfield",
+                       "page":  "waleetle",
+                       "name":  "Waleetle",
+                       "form":  "Snowfield Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Earth",
+                                        "Ice"
+                                    ],
+                       "abilities":  {
+                                         "Earth":  3,
+                                         "Hauling":  3,
+                                         "Ice":  2
+                                     }
+                   },
+                   {
+                       "id":  "wisptis",
+                       "page":  "wisptis",
+                       "name":  "Wisptis",
+                       "form":  null,
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark"
+                                    ],
+                       "abilities":  {
+                                         "Dark":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "wisptis-forest",
+                       "page":  "wisptis",
+                       "name":  "Wisptis",
+                       "form":  "Forest Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark",
+                                        "Grass"
+                                    ],
+                       "abilities":  {
+                                         "Grass":  1,
+                                         "Dark":  1,
+                                         "Artisanship":  1
+                                     }
+                   },
+                   {
+                       "id":  "wisptis-highland",
+                       "page":  "wisptis",
+                       "name":  "Wisptis",
+                       "form":  "Highland Form",
+                       "prismana":  false,
+                       "unobtainable":  false,
+                       "elements":  [
+                                        "Dark",
+                                        "Fire"
+                                    ],
+                       "abilities":  {
+                                         "Fire":  1,
+                                         "Dark":  1,
+                                         "Artisanship":  1
+                                     }
+                   }
+               ]
+}

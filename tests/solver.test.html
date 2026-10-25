@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Solver tests</title>
+  <style>
+    body { font: 14px/1.5 system-ui, sans-serif; padding: 16px; }
+    .pass { color: #2f7a4b; } .fail { color: #b3412e; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Solver tests</h1>
+  <pre id="out"></pre>
+  <script src="../js/solver.js"></script>
+  <script>
+    const { solve } = AniimoSolver;
+    const lines = [];
+    let failed = 0;
+
+    function test(name, fn) {
+      try { fn(); lines.push(`PASS ${name}`); }
+      catch (e) { failed++; lines.push(`FAIL ${name}: ${e.message}`); }
+    }
+    function eq(actual, expected, what) {
+      const a = JSON.stringify(actual), b = JSON.stringify(expected);
+      if (a !== b) throw new Error(`${what || 'value'}: expected ${b}, got ${a}`);
+    }
+    const ids = res => res.team.map(t => t.aniimo.id).sort();
+    const A = (id, abilities, prismana = false) => ({ id, name: id, abilities, prismana });
+    const R = (ability, minLevel = 1, count = 1) => ({ ability, minLevel, count });
+
+    const roster = [
+      A('pyro', { Fire: 3 }),
+      A('leafy', { Grass: 3 }),
+      A('haul', { Hauling: 2 }),
+      A('combo', { Fire: 2, Grass: 2, Hauling: 1 }),
+      A('weakfire', { Fire: 1 }),
+      A('bestfire', { Fire: 3, Wind: 1 }),
+      A('prism', { Grass: 4, Hauling: 4 }, true),
+    ];
+    const noPrismana = roster.filter(a => !a.prismana);
+
+    test('no requirements -> empty team', () => {
+      const r = solve(roster, []);
+      eq(r.status, 'ok'); eq(r.count, 0);
+    });
+
+    test('single ability picks the highest level', () => {
+      const r = solve(noPrismana, [R('Fire', 1)]);
+      eq(r.count, 1);
+      eq(r.team[0].fills[0].level, 3, 'level');
+    });
+
+    test('multi-ability Aniimo beats separate specialists', () => {
+      const r = solve(noPrismana, [R('Fire'), R('Grass'), R('Hauling')]);
+      eq(r.count, 1); eq(ids(r), ['combo']);
+    });
+
+    test('level threshold excludes low-level Aniimo', () => {
+      const r = solve(noPrismana, [R('Fire', 3), R('Grass', 3)]);
+      eq(r.count, 2);
+      eq(r.team.some(t => t.aniimo.id === 'combo'), false, 'combo used');
+    });
+
+    test('count > 1 with duplicates allowed reuses the best', () => {
+      const r = solve(noPrismana, [R('Grass', 3, 3)]);
+      eq(r.count, 3); eq(r.team.length, 1); eq(r.team[0].copies, 3);
+    });
+
+    test('count > 1 without duplicates uses distinct Aniimo', () => {
+      const r = solve(noPrismana, [R('Fire', 2, 3)], { allowDuplicates: false });
+      eq(r.count, 3); eq(ids(r), ['bestfire', 'combo', 'pyro']);
+    });
+
+    test('not enough distinct Aniimo -> unfillable with count', () => {
+      const r = solve(noPrismana, [R('Fire', 3, 3)], { allowDuplicates: false });
+      eq(r.status, 'unfillable'); eq(r.unfillable[0].available, 2);
+    });
+
+    test('nobody qualifies -> unfillable', () => {
+      const r = solve(noPrismana, [R('Ice')]);
+      eq(r.status, 'unfillable'); eq(r.unfillable[0].ability, 'Ice');
+    });
+
+    test('max too low -> over-max with the real minimum', () => {
+      const r = solve(noPrismana, [R('Fire', 3), R('Grass', 3), R('Hauling', 2)], { maxCount: 2 });
+      eq(r.status, 'over-max'); eq(r.count, 3);
+    });
+
+    test('Prismana excluded when filtered out, used when allowed', () => {
+      const off = solve(noPrismana, [R('Grass', 4)]);
+      eq(off.status, 'unfillable');
+      const on = solve(roster, [R('Grass', 4)]);
+      eq(on.status, 'ok'); eq(ids(on), ['prism']);
+    });
+
+    test('Prismana lowers the count when allowed', () => {
+      const reqs = [R('Grass', 3), R('Hauling', 2)];
+      eq(solve(noPrismana, reqs).count, 2);
+      eq(solve(roster, reqs).count, 1);
+    });
+
+    test('tie on count broken by higher total level', () => {
+      // pyro (Fire 3) and bestfire (Fire 3, Wind 1) both work; bestfire also gives Wind.
+      const r = solve(noPrismana, [R('Fire', 1), R('Wind', 1)]);
+      eq(r.count, 1); eq(ids(r), ['bestfire']);
+      const r2 = solve([A('lo', { Fire: 2 }), A('hi', { Fire: 3 })], [R('Fire')]);
+      eq(ids(r2), ['hi']);
+    });
+
+    test('single-role mode: one Aniimo fills one requirement', () => {
+      const r = solve(noPrismana, [R('Fire'), R('Grass'), R('Hauling')], { multiRole: false });
+      eq(r.count, 3);
+      r.team.forEach(t => eq(t.fills.length <= t.copies, true, 'fills per copy'));
+    });
+
+    test('larger random roster solves exactly and fast', () => {
+      const abs = ['Fire','Water','Grass','Earth','Lightning','Ice','Wind','Dark','Light','Hauling','Artisanship','Leisure','Perfumery'];
+      let seed = 7;
+      const rnd = n => { seed = (seed * 16807) % 2147483647; return seed % n; };
+      const big = [];
+      for (let i = 0; i < 220; i++) {
+        const ab = {};
+        for (let k = 0, m = 1 + rnd(3); k < m; k++) ab[abs[rnd(abs.length)]] = 1 + rnd(4);
+        big.push(A('a' + i, ab));
+      }
+      const t0 = performance.now();
+      const r = solve(big, abs.map(a => R(a, 2, 2)), { allowDuplicates: false });
+      const ms = performance.now() - t0;
+      eq(r.status, 'ok'); eq(r.exact, true, 'exact');
+      if (ms > 3000) throw new Error(`took ${ms.toFixed(0)}ms`);
+      lines.push(`     (${r.count} Aniimo, ${ms.toFixed(0)}ms)`);
+    });
+
+    lines.push('', failed ? `${failed} FAILED` : 'ALL PASSED');
+    const out = document.getElementById('out');
+    out.textContent = lines.join('\n');
+    out.className = failed ? 'fail' : 'pass';
+    document.title = failed ? 'FAIL' : 'PASS';
+  </script>
+</body>
+</html>

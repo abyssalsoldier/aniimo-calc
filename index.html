@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aniimo Homeland Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site">
+    <h1>Aniimo Homeland Calculator</h1>
+    <p>Pick the Homeland abilities you need and how many Aniimo you can house. The calculator finds the smallest team that covers everything.</p>
+  </header>
+
+  <main>
+    <section class="card" id="needs">
+      <h2><span class="step">1</span> What do you need?</h2>
+      <p class="muted">Tick each ability, then set the minimum level and how many workers need it.</p>
+      <div id="req-list" class="req-list"></div>
+
+      <div class="settings">
+        <label class="field">
+          <span>Max Aniimo in your Home</span>
+          <input type="number" id="max-count" min="1" max="99" value="45">
+        </label>
+        <label class="check"><input type="checkbox" id="allow-prismana"> Allow Prismana forms <small>(rare, hard to get)</small></label>
+        <label class="check"><input type="checkbox" id="only-owned"> Only use Aniimo I own <small>(tick them in the list below)</small></label>
+        <label class="check"><input type="checkbox" id="multi-role" checked> One Aniimo can cover several abilities</label>
+        <label class="check"><input type="checkbox" id="allow-dupes" checked> Allow more than one of the same Aniimo</label>
+        <button type="button" id="reset-needs" class="link">Clear all needs</button>
+      </div>
+    </section>
+
+    <section class="card" id="result-card">
+      <h2><span class="step">2</span> Best team</h2>
+      <div id="result" aria-live="polite"><p class="muted">Tick at least one ability above.</p></div>
+    </section>
+
+    <section class="card" id="roster">
+      <h2><span class="step">3</span> All Aniimo <small id="roster-count" class="muted"></small></h2>
+      <div class="filters">
+        <input type="search" id="search" placeholder="Search name or form…" aria-label="Search Aniimo">
+        <select id="ability-filter" aria-label="Filter by ability"><option value="">Any ability</option></select>
+        <label class="check"><input type="checkbox" id="show-prismana" checked> Show Prismana</label>
+        <span class="bulk">
+          <button type="button" id="own-shown">Own all shown</button>
+          <button type="button" id="unown-shown">Un-own shown</button>
+        </span>
+      </div>
+      <div class="table-wrap">
+        <table id="aniimo-table">
+          <thead>
+            <tr><th>Own</th><th>Aniimo</th><th>Elements</th><th>Homeland abilities</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <p>Data from <a href="https://metabot.gg/en/aniimo/creatures" rel="noopener">metabot.gg</a>, <span id="data-date"></span>. Spotted a mistake? Open an issue on <a href="https://github.com/abyssalsoldier/aniimo-calc" rel="noopener">GitHub</a>.</p>
+  </footer>
+
+  <script src="js/solver.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

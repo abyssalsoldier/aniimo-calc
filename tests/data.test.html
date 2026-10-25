@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Data + solver scenarios</title>
+  <style>body { font: 14px/1.5 system-ui, sans-serif; padding: 16px; }</style>
+</head>
+<body>
+  <h1>Real-data scenarios</h1>
+  <pre id="out">running…</pre>
+  <script src="../js/solver.js"></script>
+  <script>
+    (async () => {
+      const lines = [];
+      let failed = 0;
+      const data = await (await fetch('../data/aniimo.json')).json();
+      const usable = data.aniimo.filter(a => !a.unobtainable);
+      const noPrismana = usable.filter(a => !a.prismana);
+      const R = (ability, minLevel = 1, count = 1) => ({ ability, minLevel, count });
+      const fmt = r => r.team.map(t => `${t.aniimo.name}${t.aniimo.form ? ' (' + t.aniimo.form + ')' : ''}${t.copies > 1 ? ' x' + t.copies : ''}`).join(', ');
+
+      // Data sanity
+      const ids = new Set();
+      for (const a of data.aniimo) {
+        if (ids.has(a.id)) { failed++; lines.push(`FAIL duplicate id ${a.id}`); }
+        ids.add(a.id);
+        for (const [ab, lv] of Object.entries(a.abilities)) {
+          if (!data.abilities.includes(ab) || lv < 1 || lv > 4) { failed++; lines.push(`FAIL ${a.id}: bad ability ${ab} ${lv}`); }
+        }
+      }
+      lines.push(`${data.aniimo.length} entries, ${usable.length} usable, ${usable.length - noPrismana.length} Prismana`);
+
+      const scenarios = [
+        ['Fire 3, Grass 3, Hauling 1 (max 5)', noPrismana, [R('Fire', 3), R('Grass', 3), R('Hauling', 1)], { maxCount: 5 }],
+        ['every ability Lv1', noPrismana, data.abilities.map(a => R(a)), {}],
+        ['every ability Lv1, Prismana allowed', usable, data.abilities.map(a => R(a)), {}],
+        ['every ability Lv3', noPrismana, data.abilities.map(a => R(a, 3)), {}],
+        ['every ability Lv1 x3, no duplicates', noPrismana, data.abilities.map(a => R(a, 1, 3)), { allowDuplicates: false }],
+        ['every ability Lv1 x3, single-role, no duplicates', noPrismana, data.abilities.map(a => R(a, 1, 3)), { allowDuplicates: false, multiRole: false }],
+        // Very large ask: may hit the time budget, but must still return a valid team quickly
+        ['12 abilities Lv1 x3 (no Perfumery), no duplicates', noPrismana, data.abilities.filter(a => a !== 'Perfumery').map(a => R(a, 1, 3)), { allowDuplicates: false, nodeLimit: 300000 }, true],
+        ['12 abilities Lv2 x2, single-role, no duplicates', noPrismana, data.abilities.filter(a => a !== 'Perfumery').map(a => R(a, 2, 2)), { allowDuplicates: false, multiRole: false }],
+        ['Grass 4 without Prismana', noPrismana, [R('Grass', 4)], {}],
+      ];
+      for (const [name, pool, reqs, opt, mayBeInexact] of scenarios) {
+        const t0 = performance.now();
+        const r = AniimoSolver.solve(pool, reqs, opt);
+        const ms = performance.now() - t0;
+        const slow = ms > 5000;
+        const bad = slow || (!r.exact && !mayBeInexact) || (r.status !== 'unfillable' && !r.team.length);
+        if (bad) failed++;
+        lines.push(`${bad ? 'FAIL' : 'ok  '} ${name}: ${r.status}, ${r.count} Aniimo, level ${r.score}, ${ms.toFixed(0)}ms${r.exact ? '' : ' (SIZE NOT PROVEN)'}${r.levelExact ? '' : ' (level tie-break not proven)'}`);
+        if (r.unfillable.length) lines.push(`       unfillable: ${r.unfillable.map(u => `${u.ability} Lv${u.minLevel} (${u.available})`).join(', ')}`);
+        if (r.team.length) lines.push(`       ${fmt(r)}`);
+      }
+
+      lines.push('', failed ? `${failed} FAILED` : 'ALL PASSED');
+      document.getElementById('out').textContent = lines.join('\n');
+      document.title = failed ? 'FAIL' : 'PASS';
+    })();
+  </script>
+</body>
+</html>
