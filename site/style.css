@@ -157,6 +157,26 @@ th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line
 th { font-size: .8rem; color: var(--muted); font-weight: 600; position: sticky; top: 0; background: var(--card); }
 td:first-child { width: 44px; }
 
+/* Phones: each Aniimo becomes a card. Name on top, then its elements and
+   Homeland abilities together underneath, so nothing hides off-screen. */
+@media (max-width: 640px) {
+  #aniimo-table thead { display: none; }
+  #aniimo-table, #aniimo-table tbody { display: block; }
+  #aniimo-table tr {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    column-gap: 6px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  #aniimo-table td { border: 0; padding: 0; width: auto; }
+  #aniimo-table td:first-child { grid-row: 1 / span 3; padding-top: 2px; }
+  #aniimo-table td:nth-child(2) { font-weight: 600; }
+  #aniimo-table td:nth-child(3), #aniimo-table td:nth-child(4) { grid-column: 2; }
+  #aniimo-table td:nth-child(3) { margin-top: 4px; }
+  #aniimo-table td:nth-child(3):empty { display: none; }
+}
+
 @media (max-width: 520px) {
   .card { padding: 14px; }
   .req-list { grid-template-columns: 1fr; }
