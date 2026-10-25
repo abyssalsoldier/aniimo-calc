@@ -1,1 +1,15 @@
-{}
+{
+  "Fire": "fire.png",
+  "Water": "water.png",
+  "Grass": "grass.png",
+  "Earth": "earth.png",
+  "Lightning": "lightning.png",
+  "Ice": "ice.png",
+  "Wind": "wind.png",
+  "Dark": "dark.png",
+  "Light": "light.png",
+  "Hauling": "hauling.png",
+  "Artisanship": "artisanship.png",
+  "Leisure": "leisure.png",
+  "Perfumery": "perfumery.png"
+}
