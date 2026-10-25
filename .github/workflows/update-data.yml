@@ -1,0 +1,49 @@
+name: Update Aniimo data
+
+# Re-scrapes metabot.gg daily and commits data/aniimo.json when it changed.
+# The scraper refuses to write if the scrape looks broken, which fails this run
+# (GitHub emails the repo owner) instead of committing bad data.
+on:
+  schedule:
+    - cron: '17 6 * * *'   # daily, 06:17 UTC
+  workflow_dispatch:        # "Run workflow" button on the Actions tab
+    inputs:
+      force:
+        description: 'Write even if the safety checks fail (check the run log first)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scrape
+        shell: pwsh
+        run: |
+          $extra = @()
+          if ('${{ inputs.force }}' -eq 'true') { $extra += '-Force' }
+          ./tools/scrape.ps1 -SummaryFile "$env:RUNNER_TEMP/summary.md" @extra
+
+      - name: Commit changes
+        shell: bash
+        run: |
+          if git diff --quiet -- data/aniimo.json; then
+            echo "No data changes."
+            exit 0
+          fi
+          cat "$RUNNER_TEMP/summary.md" >> "$GITHUB_STEP_SUMMARY"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/aniimo.json
+          git commit -F "$RUNNER_TEMP/summary.md"
+          git push

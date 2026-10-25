@@ -19,13 +19,13 @@ You don't need to install anything. The server is a plain PowerShell script.
    git clone https://github.com/abyssalsoldier/aniimo-calc
    cd aniimo-calc
    ```
-   Run `git pull` later to get updates.
 2. Start the server on the port you want:
    - Double-click **`start.bat`**. It uses port **8080**, or `ANIIMO_PORT` if you've set it.
    - Or, from a terminal: `start.bat 5173`
    - Or call PowerShell directly: `powershell -ExecutionPolicy Bypass -File serve.ps1 -Port 5173`
 3. Open `http://localhost:5173` (use your port) to check it works. Press **Ctrl+C** in the server window to stop it.
 
+**Staying up to date:** while it's running, the server does a `git pull` every 6 hours, starting right away. New Aniimo data published to GitHub (see below) shows up on your site without a restart. Change the interval with `-PullHours 2`, or turn it off with `-PullHours 0`. Code changes, such as a new `serve.ps1`, apply the next time you restart it. Avoid editing files in this folder by hand: a local edit to a file that also changed on GitHub will make the pull fail. The server window will say so.
 The server only listens on `127.0.0.1`, so nothing on your network can reach it except through your tunnel. It only serves the site's own files. Pass `-ListenAddress 0.0.0.0` if you want it reachable on your LAN.
 
 ### Putting it on your domain with an existing Cloudflare Tunnel
@@ -46,22 +46,34 @@ Point a public hostname on your tunnel at the local port:
 
 Open Task Scheduler → *Create Basic Task* → trigger **When I log on** → action **Start a program**. For the program, choose `start.bat` in the repo folder. Put your port (e.g. `5173`) in *Add arguments*, and the repo folder in *Start in*.
 
-## Updating the Aniimo data
+## Keeping the Aniimo list up to date
 
-The roster lives in [`data/aniimo.json`](data/aniimo.json). It's built from [metabot.gg](https://metabot.gg/en/aniimo/creatures) by:
+The roster lives in [`data/aniimo.json`](data/aniimo.json), one Aniimo per line. It's built from [metabot.gg](https://metabot.gg/en/aniimo/creatures). New species and forms are picked up automatically as the game adds them.
 
+**Automatic (GitHub Actions):** the [Update Aniimo data](.github/workflows/update-data.yml) workflow re-scrapes every day at 06:17 UTC. If anything changed, it commits the new data with a message listing what was added, changed or removed. Your server's auto-pull then picks it up. If nothing changed, it does nothing.
+
+- **To run it now:** go to the repo's **Actions** tab → *Update Aniimo data* → *Run workflow*.
+- **If it fails**, GitHub emails you. The scraper refuses to write when the scrape looks broken: pages that won't load, lots of entries disappearing, entries where nothing could be parsed (usually means metabot.gg changed its page layout), or a Homeland ability name it doesn't know (if the game added one, add it to `$Abilities` in `tools/scrape.ps1`). The run log says which. If you've checked the change is genuine, re-run with **force** ticked.
+
+**By hand:**
 ```
-powershell -ExecutionPolicy Bypass -File tools\scrape.ps1
+powershell -ExecutionPolicy Bypass -File tools\scrape.ps1               # everything
+powershell -ExecutionPolicy Bypass -File tools\scrape.ps1 -Only tromber,glacy
 ```
+The file is only rewritten when the data actually changed. It also prints a summary of the changes.
 
-Pass `-Only tromber,glacy` to refetch specific creatures into a separate file with `-OutFile`. Each entry looks like this:
-
+**Fixing wrong data:** don't edit `aniimo.json` directly, since the next scrape would undo it. Put corrections in [`data/overrides.json`](data/overrides.json). They're applied after every scrape:
 ```json
-{ "id": "tromber-beach", "name": "Tromber", "form": "Beach Form", "prismana": false,
-  "elements": ["Wind", "Water"], "abilities": { "Wind": 3, "Water": 2 } }
+{ "patch": {
+    "tuckin-90207": { "unobtainable": true },
+    "glacy": { "abilities": { "Water": 3, "Hauling": 3, "Ice": 2 } }
+} }
 ```
-
-If you spot a wrong ability or level, fix the entry directly and open a pull request, or [open an issue](https://github.com/abyssalsoldier/aniimo-calc/issues).
+Any field you give replaces the scraped value: `name`, `form`, `prismana`, `unobtainable`, `elements`, or `abilities` (replaces the whole list). Each entry in `aniimo.json` looks like this:
+```json
+{"id":"tromber-beach","page":"tromber","name":"Tromber","form":"Beach Form","prismana":false,"unobtainable":false,"elements":["Wind","Water"],"abilities":{"Wind":3,"Water":2}}
+```
+Spotted a mistake? [Open an issue](https://github.com/abyssalsoldier/aniimo-calc/issues).
 
 ## How the calculator decides
 
