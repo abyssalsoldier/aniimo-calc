@@ -10,10 +10,14 @@
   <pre id="out">running…</pre>
   <script src="../js/solver.js"></script>
   <script>
-    (async () => {
+    (() => {
       const lines = [];
       let failed = 0;
-      const data = await (await fetch('../data/aniimo.json')).json();
+      // Synchronous load so the whole run finishes before the page's load event (real timings in headless runs)
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', '../data/aniimo.json', false);
+      xhr.send();
+      const data = JSON.parse(xhr.responseText);
       const usable = data.aniimo.filter(a => !a.unobtainable);
       const noPrismana = usable.filter(a => !a.prismana);
       const R = (ability, minLevel = 1, count = 1) => ({ ability, minLevel, count });
@@ -37,24 +41,44 @@
         ['every ability Lv3', noPrismana, data.abilities.map(a => R(a, 3)), {}],
         ['every ability Lv1 x3, no duplicates', noPrismana, data.abilities.map(a => R(a, 1, 3)), { allowDuplicates: false }],
         ['every ability Lv1 x3, single-role, no duplicates', noPrismana, data.abilities.map(a => R(a, 1, 3)), { allowDuplicates: false, multiRole: false }],
-        // Very large ask: may hit the time budget, but must still return a valid team quickly
-        ['12 abilities Lv1 x3 (no Perfumery), no duplicates', noPrismana, data.abilities.filter(a => a !== 'Perfumery').map(a => R(a, 1, 3)), { allowDuplicates: false, nodeLimit: 300000 }, true],
+        ['12 abilities Lv1 x3 (no Perfumery), no duplicates', noPrismana, data.abilities.filter(a => a !== 'Perfumery').map(a => R(a, 1, 3)), { allowDuplicates: false }],
+        ['12 abilities Lv1 x5 (no Perfumery), no duplicates', noPrismana, data.abilities.filter(a => a !== 'Perfumery').map(a => R(a, 1, 5)), { allowDuplicates: false }],
+        ['12 abilities Lv2 x4 (no Perfumery), no duplicates, Prismana', usable, data.abilities.filter(a => a !== 'Perfumery').map(a => R(a, 2, 4)), { allowDuplicates: false }],
+        ['every ability Lv1 x10, duplicates allowed', noPrismana, data.abilities.map(a => R(a, 1, 10)), {}],
+        ['every ability Lv3 x6, duplicates allowed, Prismana', usable, data.abilities.filter(a => a !== 'Perfumery').map(a => R(a, 3, 6)), {}],
         ['12 abilities Lv2 x2, single-role, no duplicates', noPrismana, data.abilities.filter(a => a !== 'Perfumery').map(a => R(a, 2, 2)), { allowDuplicates: false, multiRole: false }],
         ['Grass 4 without Prismana', noPrismana, [R('Grass', 4)], {}],
       ];
-      for (const [name, pool, reqs, opt, mayBeInexact] of scenarios) {
+      for (const [name, pool, reqs, opt] of scenarios) {
         const t0 = performance.now();
         const r = AniimoSolver.solve(pool, reqs, opt);
         const ms = performance.now() - t0;
-        const slow = ms > 5000;
-        const bad = slow || (!r.exact && !mayBeInexact) || (r.status !== 'unfillable' && !r.team.length);
+        const slow = ms > 2000;
+        const bad = slow || !r.exact || (r.status !== 'unfillable' && !r.team.length);
         if (bad) failed++;
-        lines.push(`${bad ? 'FAIL' : 'ok  '} ${name}: ${r.status}, ${r.count} Aniimo, level ${r.score}, ${ms.toFixed(0)}ms${r.exact ? '' : ' (SIZE NOT PROVEN)'}${r.levelExact ? '' : ' (level tie-break not proven)'}`);
+        lines.push(`${bad ? 'FAIL' : 'ok  '} ${name}: ${r.status}, ${r.count} Aniimo, level ${r.score}, ${ms.toFixed(0)}ms, ${r.nodes} nodes${r.exact ? '' : ' (NOT PROVEN OPTIMAL)'}`);
         if (r.unfillable.length) lines.push(`       unfillable: ${r.unfillable.map(u => `${u.ability} Lv${u.minLevel} (${u.available})`).join(', ')}`);
         if (r.team.length) lines.push(`       ${fmt(r)}`);
       }
 
-      lines.push('', failed ? `${failed} FAILED` : 'ALL PASSED');
+      // Random requests against the real roster: every one must be proven optimal, quickly.
+      let seed = 2026, worst = { ms: 0 }, total = 0;
+      const rnd = n => { seed = (seed * 16807) % 2147483647; return seed % n; };
+      for (let n = 0; n < 300; n++) {
+        const reqs = data.abilities.filter(() => rnd(2)).map(a => R(a, 1 + rnd(4), 1 + rnd(4)));
+        const opt = { allowDuplicates: rnd(2) === 0, multiRole: rnd(5) > 0 };
+        const pool = rnd(2) ? usable : noPrismana;
+        const t0 = performance.now();
+        const r = AniimoSolver.solve(pool, reqs, opt);
+        const ms = performance.now() - t0;
+        total += ms;
+        if (ms > worst.ms) worst = { ms, n, reqs: reqs.map(q => `${q.ability} ${q.minLevel}+ x${q.count}`).join(', '), opt, nodes: r.nodes };
+        if (!r.exact) { failed++; lines.push(`FAIL random #${n} not proven optimal`); }
+      }
+      lines.push(`${worst.ms > 2000 ? 'FAIL' : 'ok  '} 300 random requests: avg ${(total / 300).toFixed(1)}ms, worst ${worst.ms.toFixed(0)}ms (#${worst.n}, ${worst.nodes} nodes: ${worst.reqs}; ${JSON.stringify(worst.opt)})`);
+      if (worst.ms > 2000) failed++;
+
+      lines.push('', failed ?`${failed} FAILED` : 'ALL PASSED');
       document.getElementById('out').textContent = lines.join('\n');
       document.title = failed ? 'FAIL' : 'PASS';
     })();

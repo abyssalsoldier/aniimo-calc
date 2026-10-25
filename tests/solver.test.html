@@ -132,7 +132,49 @@
       lines.push(`     (${r.count} Aniimo, ${ms.toFixed(0)}ms)`);
     });
 
-    lines.push('', failed ? `${failed} FAILED` : 'ALL PASSED');
+    test('matches brute force on 300 random small cases', () => {
+      const abs = ['Fire', 'Water', 'Grass', 'Hauling'];
+      let seed = 11;
+      const rnd = n => { seed = (seed * 16807) % 2147483647; return seed % n; };
+
+      // Try every multiset of up to `limit` picks; return the best (count, -score).
+      function brute(pool, reqs, dupes) {
+        let best = null;
+        const lv = pool.map(a => reqs.map(r => (a.abilities[r.ability] || 0) >= r.minLevel ? a.abilities[r.ability] : 0));
+        const limit = reqs.reduce((s, r) => s + r.count, 0);
+        (function go(start, team) {
+          const cover = reqs.map((_, i) => team.filter(t => lv[t][i] > 0).length);
+          if (cover.every((c, i) => c >= reqs[i].count)) {
+            const score = team.reduce((s, t) => s + lv[t].reduce((a, b) => a + b, 0), 0);
+            if (!best || team.length < best.count || (team.length === best.count && score > best.score)) {
+              best = { count: team.length, score };
+            }
+            return;
+          }
+          if (team.length >= limit) return;
+          for (let t = start; t < pool.length; t++) go(dupes ? t : t + 1, team.concat(t));
+        })(0, []);
+        return best;
+      }
+
+      for (let n = 0; n < 300; n++) {
+        const pool = [];
+        for (let i = 0, size = 3 + rnd(6); i < size; i++) {
+          const ab = {};
+          for (let k = 0, m = 1 + rnd(3); k < m; k++) ab[abs[rnd(4)]] = 1 + rnd(4);
+          pool.push(A('p' + i, ab));
+        }
+        const reqs = abs.filter(() => rnd(3) > 0).map(a => R(a, 1 + rnd(3), 1 + rnd(3)));
+        if (!reqs.length) continue;
+        const dupes = rnd(2) === 0;
+        const expected = brute(pool, reqs, dupes);
+        const got = solve(pool, reqs, { allowDuplicates: dupes });
+        if (!expected) { eq(got.status, 'unfillable', `case ${n} status`); continue; }
+        eq([got.count, got.score], [expected.count, expected.score], `case ${n} (dupes ${dupes})`);
+      }
+    });
+
+    lines.push('', failed ?`${failed} FAILED` : 'ALL PASSED');
     const out = document.getElementById('out');
     out.textContent = lines.join('\n');
     out.className = failed ? 'fail' : 'pass';
