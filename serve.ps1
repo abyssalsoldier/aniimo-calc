@@ -1,16 +1,15 @@
-# Minimal static file server for the calculator. No installs, no admin rights.
-# Usage: powershell -ExecutionPolicy Bypass -File serve.ps1 [-Port 8080] [-ListenAddress 127.0.0.1] [-PullHours 6]
+# Local test server: serves site/ at / and tests/ at /tests/. No installs, no admin rights.
+# The public site is hosted on Cloudflare Pages; this is for trying changes locally.
+# Usage: powershell -ExecutionPolicy Bypass -File serve.ps1 [-Port 8080]
 # The port can also come from the ANIIMO_PORT environment variable.
-# While running, it does a `git pull` every -PullHours hours (0 = never) so new Aniimo
-# data from GitHub shows up without a restart. Files are read fresh on every request.
 param(
     [int]$Port = $(if ($env:ANIIMO_PORT) { [int]$env:ANIIMO_PORT } else { 8080 }),
-    [string]$ListenAddress = '127.0.0.1',
-    [double]$PullHours = 6
+    [string]$ListenAddress = '127.0.0.1'
 )
 
 $ErrorActionPreference = 'Stop'
-$Root = [System.IO.Path]::GetFullPath($PSScriptRoot)
+$SiteRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot 'site'))
+$TestsRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot 'tests'))
 $Mime = @{
     '.html' = 'text/html; charset=utf-8'
     '.css'  = 'text/css; charset=utf-8'
@@ -23,8 +22,6 @@ $Mime = @{
     '.webp' = 'image/webp'
     '.txt'  = 'text/plain; charset=utf-8'
 }
-# Only these top-level folders/files are served
-$Public = @('index.html', 'style.css', 'js', 'data', 'tests', 'favicon.ico')
 
 function Send-Response($stream, [int]$code, [string]$status, [string]$type, [byte[]]$body, [bool]$headOnly) {
     $head = "HTTP/1.1 $code $status`r`nContent-Type: $type`r`nContent-Length: $($body.Length)`r`n" +
@@ -37,11 +34,12 @@ function Send-Response($stream, [int]$code, [string]$status, [string]$type, [byt
 function Resolve-RequestPath([string]$target) {
     $path = [System.Uri]::UnescapeDataString(($target -split '[?#]')[0])
     if ($path -eq '/' -or $path -eq '') { $path = '/index.html' }
+    $root = $SiteRoot
+    if ($path -match '^/tests(/|$)') { $root = $TestsRoot; $path = $path.Substring(6) }
     $rel = $path.TrimStart('/').Replace('/', '\')
-    if ($rel.Split('\')[0] -notin $Public) { return $null }
-    $full = [System.IO.Path]::GetFullPath((Join-Path $Root $rel))
-    # Block path traversal outside the site folder
-    if (-not $full.StartsWith($Root + '\', [System.StringComparison]::OrdinalIgnoreCase)) { return $null }
+    $full = [System.IO.Path]::GetFullPath((Join-Path $root $rel))
+    # Block path traversal outside the served folder
+    if (-not $full.StartsWith($root + '\', [System.StringComparison]::OrdinalIgnoreCase)) { return $null }
     if (Test-Path $full -PathType Container) { $full = Join-Path $full 'index.html' }
     if (Test-Path $full -PathType Leaf) { return $full }
     $null
@@ -56,37 +54,8 @@ try {
 }
 Write-Host "Aniimo Homeland Calculator running at http://localhost:$Port/  (Ctrl+C to stop)" -ForegroundColor Green
 
-# ---- periodic `git pull` (runs in the background so requests aren't blocked) ----
-$canPull = $PullHours -gt 0 -and (Test-Path (Join-Path $Root '.git')) -and (Get-Command git -ErrorAction SilentlyContinue)
-if ($PullHours -gt 0 -and -not $canPull) { Write-Host 'Auto-update off: not a git checkout, or git is not installed.' -ForegroundColor Yellow }
-elseif ($canPull) { Write-Host "Auto-update: git pull every $PullHours hour(s)." }
-$pull = $null
-$nextPull = Get-Date   # pull once at startup
-$pullOut = Join-Path ([System.IO.Path]::GetTempPath()) "aniimo-calc-pull-$Port.txt"
-
-function Step-AutoPull {
-    if (-not $script:canPull) { return }
-    if ($script:pull) {
-        if (-not $script:pull.HasExited) { return }
-        $msg = ((Get-Content $script:pullOut, "$($script:pullOut).err" -ErrorAction SilentlyContinue) -join "`n").Trim()
-        if ($script:pull.ExitCode -eq 0) {
-            if ($msg -notmatch 'Already up to date') { Write-Host ("{0:HH:mm:ss} Updated from GitHub: {1}" -f (Get-Date), (($msg -split "`n") | Where-Object { $_ -match 'changed' } | Select-Object -Last 1)) -ForegroundColor Green }
-        } else {
-            Write-Host ("{0:HH:mm:ss} git pull failed (exit {1}): {2}" -f (Get-Date), $script:pull.ExitCode, $msg) -ForegroundColor Yellow
-        }
-        $script:pull = $null
-    }
-    if ((Get-Date) -ge $script:nextPull) {
-        $script:nextPull = (Get-Date).AddHours($PullHours)
-        $script:pull = Start-Process git -ArgumentList '-C', "`"$Root`"", 'pull', '--ff-only' -NoNewWindow -PassThru `
-            -RedirectStandardOutput $script:pullOut -RedirectStandardError "$($script:pullOut).err"
-        $null = $script:pull.Handle   # lets Windows PowerShell report ExitCode later
-    }
-}
-
 try {
     while ($true) {
-        Step-AutoPull
         # Poll so Ctrl+C is handled promptly
         if (-not $listener.Pending()) { Start-Sleep -Milliseconds 50; continue }
         $client = $listener.AcceptTcpClient()

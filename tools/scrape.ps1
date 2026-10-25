@@ -1,4 +1,4 @@
-# Builds data/aniimo.json from metabot.gg creature pages, then applies data/overrides.json.
+# Builds site/data/aniimo.json from metabot.gg creature pages, then applies tools/overrides.json.
 #
 #   powershell -ExecutionPolicy Bypass -File tools\scrape.ps1           # full refresh
 #   powershell -ExecutionPolicy Bypass -File tools\scrape.ps1 -Only tromber,glacy
@@ -10,8 +10,8 @@
 param(
     [int]$DelayMs = 600,
     [string[]]$Only,   # optional creature slugs to fetch instead of the full index
-    [string]$OutFile = (Join-Path (Join-Path (Join-Path $PSScriptRoot '..') 'data') 'aniimo.json'),
-    [string]$OverridesFile = (Join-Path (Join-Path (Join-Path $PSScriptRoot '..') 'data') 'overrides.json'),
+    [string]$OutFile = (Join-Path (Join-Path (Join-Path (Join-Path $PSScriptRoot '..') 'site') 'data') 'aniimo.json'),
+    [string]$OverridesFile = (Join-Path $PSScriptRoot 'overrides.json'),
     [string]$SummaryFile,
     [switch]$Force
 )
@@ -74,7 +74,7 @@ function Get-Creature([string]$path) {
     $html = [regex]::Replace($html, '<script.*?</script>', '', $S)
     $slug = $path.Split('/')[-1]
     # Bosses can't be owned by players. Other cases (NPC-only entries, duplicate pages)
-    # are listed in data/overrides.json. ("No wild spawn" alone isn't enough: e.g.
+    # are listed in tools/overrides.json. ("No wild spawn" alone isn't enough: e.g.
     # Besauce comes from a fragment exchange.)
     $unobtainable = $slug -match 'boss'
 

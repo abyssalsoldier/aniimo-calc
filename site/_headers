@@ -1,0 +1,13 @@
+# Cloudflare Pages response headers (this file itself is not published).
+# Pages serves everything from Cloudflare's edge cache; these only tune browsers.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+
+# Data changes at most daily: let browsers reuse it for 10 minutes, then revalidate.
+/data/*
+  Cache-Control: public, max-age=600, must-revalidate

@@ -1,6 +1,7 @@
 name: Update Aniimo data
 
-# Re-scrapes metabot.gg daily and commits data/aniimo.json when it changed.
+# Re-scrapes metabot.gg daily and commits site/data/aniimo.json when it changed.
+# Cloudflare Pages redeploys the site on every push, so updates go live in about a minute.
 # The scraper refuses to write if the scrape looks broken, which fails this run
 # (GitHub emails the repo owner) instead of committing bad data.
 on:
@@ -37,13 +38,13 @@ jobs:
       - name: Commit changes
         shell: bash
         run: |
-          if git diff --quiet -- data/aniimo.json; then
+          if git diff --quiet -- site/data/aniimo.json; then
             echo "No data changes."
             exit 0
           fi
           cat "$RUNNER_TEMP/summary.md" >> "$GITHUB_STEP_SUMMARY"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/aniimo.json
+          git add site/data/aniimo.json
           git commit -F "$RUNNER_TEMP/summary.md"
           git push

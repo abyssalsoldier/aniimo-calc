@@ -249,7 +249,7 @@
       const res = await fetch('data/aniimo.json');
       DATA = await res.json();
     } catch (e) {
-      $('#result').replaceChildren(el('p', { class: 'bad' }, 'Could not load data/aniimo.json. Run the site through serve.ps1 rather than opening the file directly.'));
+      $('#result').replaceChildren(el('p', { class: 'bad' }, 'Could not load the Aniimo list. Please reload the page.'));
       return;
     }
     $('#data-date').textContent = `updated ${DATA.generated}`;

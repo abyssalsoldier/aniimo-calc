@@ -10,47 +10,39 @@ A small web tool for planning your **Homeland** in *Aniimo*. You tell it which H
 - **"Only use Aniimo I own"**: tick the Aniimo you have in the list and plan with just those.
 - Settings and your owned list are saved in your browser.
 
-## Running it on Windows
+## Hosting (Cloudflare Pages)
 
-You don't need to install anything. The server is a plain PowerShell script.
+The calculator is a static site: every calculation runs in the visitor's browser, and the server only hands out a handful of small files from [`site/`](site/). Cloudflare Pages serves those from its global network for free, with no traffic limits on static files, so it copes with any number of visitors. It also redeploys automatically on every push, including the daily data updates.
 
-1. Get the code:
-   ```
-   git clone https://github.com/abyssalsoldier/aniimo-calc
-   cd aniimo-calc
-   ```
-2. Start the server on the port you want:
-   - Double-click **`start.bat`**. It uses port **8080**, or `ANIIMO_PORT` if you've set it.
-   - Or, from a terminal: `start.bat 5173`
-   - Or call PowerShell directly: `powershell -ExecutionPolicy Bypass -File serve.ps1 -Port 5173`
-3. Open `http://localhost:5173` (use your port) to check it works. Press **Ctrl+C** in the server window to stop it.
+### One-time setup
 
-**Staying up to date:** while it's running, the server does a `git pull` every 6 hours, starting right away. New Aniimo data published to GitHub (see below) shows up on your site without a restart. Change the interval with `-PullHours 2`, or turn it off with `-PullHours 0`. Code changes, such as a new `serve.ps1`, apply the next time you restart it. Avoid editing files in this folder by hand: a local edit to a file that also changed on GitHub will make the pull fail. The server window will say so.
-The server only listens on `127.0.0.1`, so nothing on your network can reach it except through your tunnel. It only serves the site's own files. Pass `-ListenAddress 0.0.0.0` if you want it reachable on your LAN.
+1. Cloudflare dashboard → **Workers & Pages** → **Create** → **Pages** tab → **Connect to Git** (*Import an existing Git repository*).
+2. Authorise GitHub if asked, and pick **abyssalsoldier/aniimo-calc**.
+3. Build settings:
+   - Production branch: `main`
+   - Framework preset: **None**
+   - Build command: *(leave empty)*
+   - Build output directory: **`site`**
+4. **Save and Deploy.** After about a minute the site is live at `https://<project>.pages.dev`.
+5. Project → **Custom domains** → **Set up a custom domain** → e.g. `calc.yourdomain.com` → **Activate domain**. Your domain is already on Cloudflare, so it creates the DNS record for you. If you'd already pointed that hostname at your tunnel, delete that public hostname first.
 
-### Putting it on your domain with an existing Cloudflare Tunnel
+After that there's nothing to run or maintain. Every push to `main` (yours, or the data bot's) is live about a minute later. Old deployments are kept under the project's **Deployments** tab, where you can roll back with one click. [`site/_headers`](site/_headers) sets security headers and browser caching.
 
-Point a public hostname on your tunnel at the local port:
+## Running it locally
 
-- **Tunnel managed in the dashboard:** go to Cloudflare Zero Trust → Networks → Tunnels → your tunnel → **Public Hostname** → *Add a public hostname*. Enter subdomain `calc`, your domain, service type **HTTP**, and URL **`localhost:5173`**.
-- **Tunnel managed with a `config.yml`:** add a rule *above* the final catch-all rule, then restart `cloudflared`:
-  ```yaml
-  ingress:
-    - hostname: calc.yourdomain.com
-      service: http://localhost:5173
-    # ...your existing rules...
-    - service: http_status:404
-  ```
+To try changes before pushing (no installs needed):
 
-### Starting it automatically
+```
+start.bat            # http://localhost:8080
+start.bat 5173       # pick a port
+```
 
-Open Task Scheduler → *Create Basic Task* → trigger **When I log on** → action **Start a program**. For the program, choose `start.bat` in the repo folder. Put your port (e.g. `5173`) in *Add arguments*, and the repo folder in *Start in*.
-
+Or run `powershell -ExecutionPolicy Bypass -File serve.ps1 -Port 5173`. Press **Ctrl+C** to stop. This local server is only for testing: it serves `site/` plus the test pages, and only on your own machine.
 ## Keeping the Aniimo list up to date
 
-The roster lives in [`data/aniimo.json`](data/aniimo.json), one Aniimo per line. It's built from [metabot.gg](https://metabot.gg/en/aniimo/creatures). New species and forms are picked up automatically as the game adds them.
+The roster lives in [`site/data/aniimo.json`](site/data/aniimo.json), one Aniimo per line. It's built from [metabot.gg](https://metabot.gg/en/aniimo/creatures). New species and forms are picked up automatically as the game adds them.
 
-**Automatic (GitHub Actions):** the [Update Aniimo data](.github/workflows/update-data.yml) workflow re-scrapes every day at 06:17 UTC. If anything changed, it commits the new data with a message listing what was added, changed or removed. Your server's auto-pull then picks it up. If nothing changed, it does nothing.
+**Automatic (GitHub Actions):** the [Update Aniimo data](.github/workflows/update-data.yml) workflow re-scrapes every day at 06:17 UTC. If anything changed, it commits the new data with a message listing what was added, changed or removed. Cloudflare Pages then redeploys, so the update is live about a minute later. If nothing changed, it does nothing.
 
 - **To run it now:** go to the repo's **Actions** tab → *Update Aniimo data* → *Run workflow*.
 - **If it fails**, GitHub emails you. The scraper refuses to write when the scrape looks broken: pages that won't load, lots of entries disappearing, entries where nothing could be parsed (usually means metabot.gg changed its page layout), or a Homeland ability name it doesn't know (if the game added one, add it to `$Abilities` in `tools/scrape.ps1`). The run log says which. If you've checked the change is genuine, re-run with **force** ticked.
@@ -62,7 +54,7 @@ powershell -ExecutionPolicy Bypass -File tools\scrape.ps1 -Only tromber,glacy
 ```
 The file is only rewritten when the data actually changed. It also prints a summary of the changes.
 
-**Fixing wrong data:** don't edit `aniimo.json` directly, since the next scrape would undo it. Put corrections in [`data/overrides.json`](data/overrides.json). They're applied after every scrape:
+**Fixing wrong data:** don't edit `aniimo.json` directly, since the next scrape would undo it. Put corrections in [`tools/overrides.json`](tools/overrides.json). They're applied after every scrape:
 ```json
 { "patch": {
     "tuckin-90207": { "unobtainable": true },
@@ -83,7 +75,7 @@ Spotted a mistake? [Open an issue](https://github.com/abyssalsoldier/aniimo-calc
 
 ## Tests
 
-With the server running, open these pages:
+With the local server running, open these pages:
 - `http://localhost:8080/tests/solver.test.html`: solver unit tests.
 - `http://localhost:8080/tests/data.test.html`: data sanity checks plus real-roster scenarios, with timings.
 
