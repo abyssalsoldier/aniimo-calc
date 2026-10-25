@@ -48,10 +48,11 @@
 
   const displayName = a => a.form ? `${a.name} (${a.form})` : a.name;
   const abilityClass = name => 'ab-' + name.toLowerCase();
+  const icon = name => AniimoIcons.icon(name);
 
   function abilityBadge(name, level) {
     return el('span', { class: `badge ${abilityClass(name)}`, title: `${name} level ${level}` },
-      name, ' ', el('b', null, String(level)));
+      icon(name), name, ' ', el('b', null, String(level)));
   }
 
   // ---------- Needs ----------
@@ -71,7 +72,7 @@
       const count = el('input', { type: 'number', min: 1, max: 20, value: n.count, 'aria-label': `${ability} workers needed` });
       const box = el('input', { type: 'checkbox', checked: n.on, 'aria-label': `Need ${ability}` });
       const row = el('div', { class: 'req' + (n.on ? ' on' : '') },
-        box, el('span', { class: `ab-name ${abilityClass(ability)}` }, ability), levelSel, count);
+        box, el('span', { class: `ab-name ${abilityClass(ability)}` }, icon(ability), ability), levelSel, count);
 
       const update = () => {
         n.on = box.checked;
@@ -113,7 +114,7 @@
         el('td', null, a.name, a.form ? el('span', { class: 'form' }, ' ' + a.form) : null,
           a.prismana ? el('span', { class: 'prismana' }, 'Prismana') : null,
           a.unobtainable ? el('span', { class: 'tag', title: 'No wild spawn, evolution or egg — never used in teams' }, 'Unobtainable') : null),
-        el('td', null, a.elements.map(e => el('span', { class: `el ${abilityClass(e)}` }, e))),
+        el('td', null, a.elements.map(e => el('span', { class: `el ${abilityClass(e)}` }, icon(e), e))),
         el('td', null, Object.entries(a.abilities).sort((x, y) => y[1] - x[1]).map(([n, l]) => abilityBadge(n, l)))
       ));
     }
