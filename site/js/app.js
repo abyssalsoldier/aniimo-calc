@@ -246,9 +246,11 @@
   }
 
   async function init() {
+    const iconsReady = AniimoIcons.loadOfficial();
     try {
       const res = await fetch('data/aniimo.json');
       DATA = await res.json();
+      await iconsReady;
     } catch (e) {
       $('#result').replaceChildren(el('p', { class: 'bad' }, 'Could not load the Aniimo list. Please reload the page.'));
       return;

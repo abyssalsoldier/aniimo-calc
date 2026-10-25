@@ -67,6 +67,18 @@ Any field you give replaces the scraped value: `name`, `form`, `prismana`, `unob
 ```
 Spotted a mistake? [Open an issue](https://github.com/abyssalsoldier/aniimo-calc/issues).
 
+## Icons
+
+Each element and Homeland ability has an icon. Official game icons are used where available. Any ability without one falls back to a hand-drawn icon in [`site/js/icons.js`](site/js/icons.js).
+
+To add official icons:
+1. Put the images in [`site/icons/`](site/icons/). PNG or WebP with a transparent background works best, at least 64×64 and square. The site shows them at about 16–20 px.
+2. List them in [`site/icons/icons.json`](site/icons/icons.json) under the ability's exact name:
+   ```json
+   { "Fire": "fire.png", "Water": "water.png", "Hauling": "hauling.png" }
+   ```
+3. Push. The site picks them up on its next deploy.
+
 ## How the calculator decides
 
 - **"One Aniimo can cover several abilities"** (on by default): an Aniimo with Grass 3 + Hauling 2 counts toward both needs. Turn it off if each worker should fill only one need.
@@ -81,4 +93,4 @@ With the local server running, open these pages:
 
 ## License
 
-MIT. Aniimo and its creatures belong to their respective owners. This is an unofficial fan tool.
+The code is MIT licensed. Aniimo, its creatures, names and game icons are the property of Pawprint Studio / FunPlus and are not covered by that licence. This is an unofficial fan tool, not affiliated with or endorsed by them.

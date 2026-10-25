@@ -1,5 +1,7 @@
-// Small hand-drawn icons for the elements and Homeland abilities (24x24, currentColor).
-// Each icon is a list of paths; `s` marks a stroked path, everything else is filled.
+// Icons for the elements and Homeland abilities.
+// Official game icons listed in site/icons/icons.json ({ "Fire": "fire.png", ... }) are
+// used where present; anything not listed falls back to these hand-drawn SVGs
+// (24x24, currentColor; each icon is a list of paths, `s` marks a stroked path).
 (function (root) {
   'use strict';
 
@@ -21,9 +23,26 @@
   };
 
   const NS = 'http://www.w3.org/2000/svg';
+  let official = {};
 
-  // Returns an <svg> element for `name`, or null if there's no icon for it.
+  // Load the list of official icon files. Missing or broken list = use the SVGs.
+  async function loadOfficial() {
+    try {
+      const res = await fetch('icons/icons.json');
+      if (res.ok) official = await res.json();
+    } catch (e) { /* keep the SVG icons */ }
+  }
+
+  // Returns an icon element for `name`, or null if there's no icon for it.
   function icon(name) {
+    if (official[name]) {
+      const img = document.createElement('img');
+      img.src = 'icons/' + official[name];
+      img.alt = '';
+      img.className = 'ico ico-img';
+      img.decoding = 'async';
+      return img;
+    }
     const paths = ICONS[name];
     if (!paths) return null;
     const svg = document.createElementNS(NS, 'svg');
@@ -47,5 +66,5 @@
     return svg;
   }
 
-  root.AniimoIcons = { icon };
+  root.AniimoIcons = { icon, loadOfficial };
 })(window);

@@ -128,6 +128,7 @@ input[type=checkbox] { width: 17px; height: 17px; accent-color: var(--accent); }
   margin-right: 4px;
 }
 .ab-name .ico { margin-right: 0; }
+.ico-img { object-fit: contain; }
 .prismana {
   margin-left: 6px; padding: 0 7px; border-radius: 999px; font-size: .72rem; font-weight: 700;
   color: #fff; background: var(--prismana);
