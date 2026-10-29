@@ -40,12 +40,12 @@ start.bat 5173       # pick a port
 Or run `powershell -ExecutionPolicy Bypass -File serve.ps1 -Port 5173`. Press **Ctrl+C** to stop. This local server is only for testing: it serves `site/` plus the test pages, and only on your own machine.
 ## Keeping the Aniimo list up to date
 
-The roster lives in [`site/data/aniimo.json`](site/data/aniimo.json), one Aniimo per line. It's built from [metabot.gg](https://metabot.gg/en/aniimo/creatures). New species and forms are picked up automatically as the game adds them.
+The roster lives in [`site/data/aniimo.json`](site/data/aniimo.json), one Aniimo per line. It's built from [AniimoTools](https://aniimotools.dev/creatures/). New species and forms are picked up automatically as the game adds them.
 
 **Automatic (GitHub Actions):** the [Update Aniimo data](.github/workflows/update-data.yml) workflow re-scrapes every day at 06:17 UTC. If anything changed, it commits the new data with a message listing what was added, changed or removed. Cloudflare Pages then redeploys, so the update is live about a minute later. If nothing changed, it does nothing.
 
 - **To run it now:** go to the repo's **Actions** tab → *Update Aniimo data* → *Run workflow*.
-- **If it fails**, GitHub emails you. The scraper refuses to write when the scrape looks broken: pages that won't load, lots of entries disappearing, entries where nothing could be parsed (usually means metabot.gg changed its page layout), or a Homeland ability name it doesn't know (if the game added one, add it to `$Abilities` in `tools/scrape.ps1`). The run log says which. If you've checked the change is genuine, re-run with **force** ticked.
+- **If it fails**, GitHub emails you. The scraper refuses to write when the scrape looks broken: pages that won't load, lots of entries disappearing, entries where nothing could be parsed (usually means aniimotools.dev changed its page layout), or a Homeland ability name it doesn't know (if the game added one, add it to `$Abilities` in `tools/scrape.ps1`). The run log says which. If you've checked the change is genuine, re-run with **force** ticked.
 
 **By hand:**
 ```
@@ -66,6 +66,18 @@ Any field you give replaces the scraped value: `name`, `form`, `prismana`, `unob
 {"id":"tromber-beach","page":"tromber","name":"Tromber","form":"Beach Form","prismana":false,"unobtainable":false,"elements":["Wind","Water"],"abilities":{"Wind":3,"Water":2}}
 ```
 Spotted a mistake? [Open an issue](https://github.com/abyssalsoldier/aniimo-calc/issues).
+
+## Ability pages and search engines
+
+Besides the calculator, the site has a **"Best Aniimo for …" page for each Homeland ability** (e.g. `/abilities/perfumery/`), plus `sitemap.xml` and `robots.txt`. These give Google real pages to show for searches like *"best aniimo for hauling"*.
+
+The ability pages, the sitemap and the ability links on the main page are generated from `aniimo.json` by [`tools/build-pages.ps1`](tools/build-pages.ps1). The scraper runs it automatically whenever the data changes, so you normally never run it yourself. Run it by hand only after changing the page layout in that script:
+```
+powershell -ExecutionPolicy Bypass -File tools\build-pages.ps1
+```
+Don't edit `site/abilities/` or `site/sitemap.xml` directly, since the next run overwrites them. In `site/index.html`, everything between the `abilities:start` / `abilities:end` markers is generated too.
+
+The site's address (`https://aniimocalc.com`) appears in `build-pages.ps1` (`$BaseUrl`), `site/index.html` (canonical link and share-preview tags) and `site/robots.txt`. Change all three if the domain changes. `site/og-image.png` is the preview picture shown when the link is shared on Discord, Reddit and similar sites.
 
 ## Icons
 

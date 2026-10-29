@@ -1,6 +1,7 @@
 name: Update Aniimo data
 
-# Re-scrapes metabot.gg daily and commits site/data/aniimo.json when it changed.
+# Re-scrapes aniimotools.dev daily and commits site/data/aniimo.json when it changed, along with
+# the ability pages and sitemap that tools/build-pages.ps1 rebuilds from it.
 # Cloudflare Pages redeploys the site on every push, so updates go live in about a minute.
 # The scraper refuses to write if the scrape looks broken, which fails this run
 # (GitHub emails the repo owner) instead of committing bad data.
@@ -45,6 +46,6 @@ jobs:
           cat "$RUNNER_TEMP/summary.md" >> "$GITHUB_STEP_SUMMARY"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add site/data/aniimo.json
+          git add site/
           git commit -F "$RUNNER_TEMP/summary.md"
           git push

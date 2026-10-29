@@ -182,3 +182,34 @@ td:first-child { width: 44px; }
   .req-list { grid-template-columns: 1fr; }
   .req { grid-template-columns: 24px 1fr 84px 64px; gap: 6px; }
 }
+
+/* Ability links and FAQ (main page), ability guide pages (site/abilities/) */
+.ab-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.ab-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 999px; text-decoration: none; color: var(--text); font-weight: 600;
+  background: color-mix(in srgb, var(--c, var(--muted)) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c, var(--muted)) 45%, transparent);
+}
+.ab-link:hover { border-color: var(--c, var(--accent)); }
+.ab-link .ico { margin-right: 0; }
+.ab-link small { font-weight: normal; }
+#faq h3 { font-size: 1rem; margin: 16px 0 4px; }
+#faq h3:first-of-type { margin-top: 0; }
+#faq p { margin: 0; }
+.crumbs { margin: 0 0 6px; font-size: .9rem; }
+header.site h1 .ico-img { width: 1.1em; height: 1.1em; vertical-align: -0.15em; margin-right: 8px; }
+.card h2 .ico-img { margin-right: 0; }
+.cta {
+  display: inline-block; padding: 8px 16px; border-radius: 8px;
+  background: var(--accent); color: var(--card); font-weight: 600; text-decoration: none;
+}
+.cta:hover { filter: brightness(1.08); }
+table.list td:first-child { width: auto; font-weight: 600; }
+table.list td:first-child .form { font-weight: normal; }
+@media (max-width: 640px) {
+  table.list thead { display: none; }
+  table.list, table.list tbody, table.list tr, table.list td { display: block; }
+  table.list tr { padding: 8px 0; border-bottom: 1px solid var(--line); }
+  table.list td { border: 0; padding: 2px 0; }
+}

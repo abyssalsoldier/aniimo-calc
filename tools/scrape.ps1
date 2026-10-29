@@ -1,4 +1,4 @@
-# Builds site/data/aniimo.json from metabot.gg creature pages, then applies tools/overrides.json.
+# Builds site/data/aniimo.json from aniimotools.dev creature pages, then applies tools/overrides.json.
 #
 #   powershell -ExecutionPolicy Bypass -File tools\scrape.ps1           # full refresh
 #   powershell -ExecutionPolicy Bypass -File tools\scrape.ps1 -Only tromber,glacy
@@ -7,6 +7,7 @@
 # without writing anything if the scrape looks broken: failed pages, many entries
 # vanishing, entries with nothing parsed, or an ability name it doesn't recognise.
 # -Force skips those checks. -SummaryFile writes a Markdown summary of the changes.
+# After writing, it runs tools/build-pages.ps1 to rebuild the ability pages and sitemap.
 param(
     [int]$DelayMs = 600,
     [string[]]$Only,   # optional creature slugs to fetch instead of the full index
@@ -22,7 +23,7 @@ $OutFile = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPa
 $OverridesFile = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($OverridesFile)
 if ($SummaryFile) { $SummaryFile = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($SummaryFile) }
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-$Base = 'https://metabot.gg'
+$Base = 'https://aniimotools.dev'
 $UA = 'Mozilla/5.0 (aniimo-calc data builder)'
 $S = [System.Text.RegularExpressions.RegexOptions]::Singleline
 
@@ -40,13 +41,6 @@ function Get-Html([string]$url) {
     }
 }
 
-function Get-Text([string]$html) {
-    $t = [regex]::Replace($html, '<svg.*?</svg>', '', $S)
-    $t = [regex]::Replace($t, '<[^>]+>', ' ')
-    $t = [System.Net.WebUtility]::HtmlDecode($t)
-    ([regex]::Replace($t, '\s+', ' ')).Trim()
-}
-
 function ConvertTo-Ability([string]$name) {
     $n = $name.Trim()
     $key = $n.ToLower()
@@ -56,86 +50,75 @@ function ConvertTo-Ability([string]$name) {
     $n
 }
 
-# "Wind 3, Water 2" -> @{ Wind = 3; Water = 2 }
-function ConvertFrom-JobList([string]$text) {
+function Get-Elements([string]$html) {
+    @([regex]::Matches($html, 'href="/elements/([a-z]+)/"') | ForEach-Object { ConvertTo-Ability $_.Groups[1].Value } | Select-Object -Unique)
+}
+
+# kit-list items -> @{ Lightning = 3; Artisanship = 3 }
+function Get-Jobs([string]$html) {
     $jobs = [ordered]@{}
-    foreach ($m in [regex]::Matches($text, '([A-Za-z][A-Za-z ]*?)\s*(?:Lv\.\s*)?(\d)')) {
-        $jobs[(ConvertTo-Ability $m.Groups[1].Value)] = [int]$m.Groups[2].Value
+    foreach ($m in [regex]::Matches($html, 'kit-list__name">([^<]+)</span>\s*<span class="kit-list__lv[^"]*">Lv\.\s*(\d)', $S)) {
+        $jobs[(ConvertTo-Ability ([System.Net.WebUtility]::HtmlDecode($m.Groups[1].Value)))] = [int]$m.Groups[2].Value
     }
     $jobs
 }
 
-function Get-Cells([string]$row) {
-    [regex]::Matches($row, '<td[^>]*>(.*?)</td>', $S) | ForEach-Object { $_.Groups[1].Value }
+function ConvertTo-Slug([string]$s) {
+    ($s.ToLower() -replace '[^a-z0-9]+', '-').Trim('-')
+}
+
+# Ids come from the names (the site's own form keys are sometimes opaque, e.g. "v1020302"):
+# "Blazen" + "Prismana Form" -> "blazen-prismana". They're stored in visitors' owned lists,
+# so a rename here needs an entry in RENAMED_IDS in site/js/app.js.
+function Get-FormId([string]$name, [string]$form) {
+    $id = ConvertTo-Slug $name
+    if ($form) { $id += '-' + (ConvertTo-Slug ($form -replace '\s*Form$', '')) }
+    $id
 }
 
 function Get-Creature([string]$path) {
     $html = Get-Html "$Base$path"
-    $html = [regex]::Replace($html, '<script.*?</script>', '', $S)
-    $slug = $path.Split('/')[-1]
-    # Bosses can't be owned by players. Other cases (NPC-only entries, duplicate pages)
-    # are listed in tools/overrides.json. ("No wild spawn" alone isn't enough: e.g.
-    # Besauce comes from a fragment exchange.)
-    $unobtainable = $slug -match 'boss'
+    $html = $html -replace ' data-astro-cid-[a-z0-9]+', ''
+    $slug = $path.Trim('/').Split('/')[-1]
+    $name = [System.Net.WebUtility]::HtmlDecode([regex]::Match($html, '<h1 class="hero__name">([^<]+)').Groups[1].Value.Trim())
+    # Creatures outside the Aniilog (no dex number) are NPC/boss-only and can't be owned
+    $unobtainable = -not [regex]::IsMatch($html, '<p class="hero__dexline">(?:(?!</p>).)*No\.\d', $S)
 
-    $h1 = [regex]::Match($html, '<h1.*?</h1>', $S).Value
-    $name = [regex]::Match($h1, '<h1[^>]*>([^<]+)').Groups[1].Value.Trim()
-    $name = [System.Net.WebUtility]::HtmlDecode($name)
-
-    $results = @()
-
-    # Multi-form creatures have a compare table with one column per form
-    $table = [regex]::Match($html, '<table[^>]*>(?:(?!</table>).)*?<th scope="col">Form</th>.*?</table>', $S).Value
-    if ($table) {
-        $header = [regex]::Match($table, '<tr><th scope="col">Form</th>.*?</tr>', $S).Value
-        $forms = [regex]::Matches($header, 'href="#form-([^"]+)">([^<]+)</a>') | ForEach-Object {
-            @{ id = $_.Groups[1].Value; label = [System.Net.WebUtility]::HtmlDecode($_.Groups[2].Value.Trim()) }
-        }
-        $rows = @{}
-        foreach ($r in [regex]::Matches($table, '<tr><th scope="row">([^<]+)</th>(.*?)</tr>', $S)) {
-            $rows[$r.Groups[1].Value.Trim()] = @(Get-Cells $r.Groups[2].Value)
-        }
-        for ($i = 0; $i -lt $forms.Count; $i++) {
-            $f = $forms[$i]
-            $kind = if ($rows['Kind']) { Get-Text $rows['Kind'][$i] } else { '' }
-            $elements = @()
-            if ($rows['Element']) {
-                $elements = @([regex]::Matches($rows['Element'][$i], 'elements/([a-z]+)') | ForEach-Object { ConvertTo-Ability $_.Groups[1].Value })
-            }
-            $jobs = if ($rows['Homeland jobs']) { ConvertFrom-JobList (Get-Text $rows['Homeland jobs'][$i]) } else { [ordered]@{} }
-            $isDefault = $kind -match 'Default' -or $f.label -eq 'Basic'
-            $results += [ordered]@{
-                id        = $f.id
-                page      = $slug
-                name      = $name
-                form      = if ($isDefault) { $null } else { $f.label }
-                prismana  = [bool](($kind + ' ' + $f.label) -match 'Prismana')
-                unobtainable = $false
-                elements  = $elements
-                abilities = $jobs
-            }
-        }
-        return $results
-    }
-
-    # Single-form creature: elements from the header tags, jobs from the homeland section
-    $headerTags = [regex]::Matches($html, '<a class="[^"]*_headerTag[^"]*"[^>]*href="/en/aniimo/elements/([a-z]+)"')
-    $elements = @($headerTags | ForEach-Object { ConvertTo-Ability $_.Groups[1].Value } | Select-Object -Unique)
+    # Homeland abilities: one kit per form whose kit differs from the default; a single
+    # list when the creature has no such forms.
     $homeland = [regex]::Match($html, 'id="homeland".*?</section>', $S).Value
-    $jobs = [ordered]@{}
-    foreach ($m in [regex]::Matches($homeland, '_pipRow" href="/en/aniimo/homeland/[^"]+">([^<]+)<.*?Lv\.\s*(\d)</a>', $S)) {
-        $jobs[(ConvertTo-Ability $m.Groups[1].Value)] = [int]$m.Groups[2].Value
+    $kits = @{}
+    foreach ($k in [regex]::Matches($homeland, '<div data-kit-form="([^"]*)"[^>]*>(.*?)</ul>', $S)) {
+        $kits[$k.Groups[1].Value] = Get-Jobs $k.Groups[2].Value
     }
-    @([ordered]@{
-        id        = $slug
-        page      = $slug
-        name      = $name
-        form      = $null
-        prismana  = $false
-        unobtainable = [bool]$unobtainable
-        elements  = $elements
-        abilities = $jobs
-    })
+    if (-not $kits.ContainsKey('')) { $kits[''] = Get-Jobs $homeland }
+
+    # Forms come from the page's album data (one entry per form, default first)
+    $album = [regex]::Match($html, '<script type="application/json" data-alb-data>(.*?)</script>', $S).Groups[1].Value
+    $forms = if ($album) { @(($album | ConvertFrom-Json).D.forms) } else { @() }
+    if (-not $forms) { $forms = @([pscustomobject]@{ key = ''; name = $name; prismana = $false }) }
+
+    # Elements: hero badges for the default form, a badge template per form tab
+    $elementsByKey = @{ '' = Get-Elements ([regex]::Match($html, '<span data-form-badges[^>]*>(.*?)</span>', $S).Groups[1].Value) }
+    foreach ($t in [regex]::Matches($html, 'data-form-tab="(\d+)"[^>]*?data-form-key(?:="([^"]*)")?')) {
+        $tpl = [regex]::Match($html, '<template data-form-badges-tpl="' + $t.Groups[1].Value + '">(.*?)</template>', $S).Groups[1].Value
+        if ($tpl) { $elementsByKey[$t.Groups[2].Value] = Get-Elements $tpl }
+    }
+
+    foreach ($f in $forms) {
+        $key = [string]$f.key
+        $form = if ($key) { [System.Net.WebUtility]::HtmlDecode($f.name) } else { $null }
+        [ordered]@{
+            id           = Get-FormId $name $form
+            page         = $slug
+            name         = $name
+            form         = $form
+            prismana     = [bool]$f.prismana
+            unobtainable = $unobtainable
+            elements     = if ($elementsByKey.ContainsKey($key)) { $elementsByKey[$key] } else { $elementsByKey[''] }
+            abilities    = if ($kits.ContainsKey($key)) { $kits[$key] } else { $kits[''] }
+        }
+    }
 }
 
 
@@ -198,12 +181,11 @@ function Format-Abilities($e) {
 
 $script:UnknownAbilities = @()
 
-if ($Only) { $paths = $Only -split ',' | ForEach-Object { "/en/aniimo/creatures/$($_.Trim())" } } else {
+if ($Only) { $paths = $Only -split ',' | ForEach-Object { "/creatures/$($_.Trim())/" } } else {
     Write-Host 'Fetching creature index...'
-    $index = Get-Html "$Base/en/aniimo/creatures"
-    # The grid lazy-loads, so also read the full list from the page's structured data
-    $paths = @([regex]::Matches($index, '(?:href="|metabot\.gg)(/en/aniimo/creatures/[a-z0-9\-]+)') |
-        ForEach-Object { $_.Groups[1].Value } | Select-Object -Unique)
+    $index = Get-Html "$Base/search-index.json" | ConvertFrom-Json
+    # The site search index lists every creature page (once per name and per alias)
+    $paths = @($index | Where-Object { $_.k -eq 'Aniimo' } | ForEach-Object { $_.h } | Select-Object -Unique)
 }
 Write-Host "Found $($paths.Count) creature pages"
 
@@ -255,7 +237,10 @@ if (Test-Path $OverridesFile) {
         }
     }
 }
-$all = @($all | Sort-Object { $_.name }, { [bool]$_.form }, { $_.form }, { $_.id })
+# Players can't own unobtainable Aniimo, so they're left out of the data entirely
+$skipped = @($all | Where-Object { $_.unobtainable })
+if ($skipped) { Write-Host "Left out $($skipped.Count) unobtainable: $(($skipped | ForEach-Object id) -join ', ')" }
+$all = @($all | Where-Object { -not $_.unobtainable } | Sort-Object { $_.name }, { [bool]$_.form }, { $_.form }, { $_.id })
 
 # ---------- sanity checks ----------
 
@@ -325,7 +310,7 @@ if ($abilitiesChanged) { $summary += "Ability list: $($Abilities -join ', ')"; $
 
 function Format-DataFile([string]$generated) {
     "{`n" +
-    "  `"source`": $(ConvertTo-JsonText "$Base/en/aniimo/creatures"),`n" +
+    "  `"source`": $(ConvertTo-JsonText "$Base/creatures/"),`n" +
     "  `"generated`": $(ConvertTo-JsonText $generated),`n" +
     "  `"abilities`": $(ConvertTo-JsonText $Abilities),`n" +
     "  `"aniimo`": [`n" +
@@ -350,3 +335,6 @@ if ($SummaryFile) {
     [System.IO.File]::WriteAllText([System.IO.Path]::GetFullPath($SummaryFile), ($summary -join "`n") + "`n", (New-Object System.Text.UTF8Encoding $false))
 }
 Write-Host "Wrote $($all.Count) entries to $OutFile"
+
+# Rebuild the ability pages, sitemap and ability links from the new data
+& (Join-Path $PSScriptRoot 'build-pages.ps1') -SiteDir (Split-Path (Split-Path $OutFile -Parent) -Parent)

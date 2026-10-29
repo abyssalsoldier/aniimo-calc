@@ -1,7 +1,5 @@
 {
-  "_help": "Hand corrections applied after every scrape. Keys under patch are Aniimo ids from site/data/aniimo.json; any field given replaces the scraped value (abilities replaces the whole ability list).",
+  "_help": "Hand corrections applied after every scrape. Keys under patch are Aniimo ids from site/data/aniimo.json; any field given replaces the scraped value (abilities replaces the whole ability list). Setting \"unobtainable\": true leaves that Aniimo out of the data, e.g. \"lunara\": { \"unobtainable\": true }",
   "patch": {
-    "lost-pathfinder": { "unobtainable": true },
-    "tuckin-90207": { "unobtainable": true }
   }
 }

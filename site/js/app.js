@@ -4,6 +4,20 @@
   const STORAGE_KEY = 'aniimo-calc-v1';
   const $ = sel => document.querySelector(sel);
 
+  // Ids that changed when the data source moved from metabot.gg to aniimotools.dev
+  // (renamed forms and species; "Basic Form" entries were duplicates of the default form).
+  const RENAMED_IDS = {
+    'fennelun': 'lunara', 'soleon': 'helion',
+    'magmarex-basic': 'magmarex', 'shelly-basic': 'shelly', 'susuta-basic': 'susuta',
+    'tubster-basic': 'tubster', 'tuckin-basic': 'tuckin',
+    'luminelle-rainstorm': 'luminelle-rainfall', 'nimbi-rainstorm': 'nimbi-rainfall',
+    'stellarys-rainstorm': 'stellarys-rainfall', 'turbo-rainstorm': 'turbo-rainfall',
+  };
+  for (const n of ['blazen', 'bolty', 'emberpup', 'flameruff', 'flutternym', 'gracewing', 'helmut',
+    'iris', 'irisal', 'pawney', 'rookey', 'scorchhowl']) RENAMED_IDS[`${n}-mountain-woods`] = `${n}-timberline`;
+  for (const n of ['flamerion', 'flutternym', 'glacy', 'gracewing', 'pomawk', 'pomegg', 'pranky',
+    'skippy', 'sparki']) RENAMED_IDS[`${n}-sea-of-flowers`] = `${n}-flowerfield`;
+
   let DATA = null;
   let state = loadState();
 
@@ -23,7 +37,10 @@
   function loadState() {
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-      if (saved) return Object.assign(defaultState(), saved);
+      if (saved) {
+        if (Array.isArray(saved.owned)) saved.owned = [...new Set(saved.owned.map(id => RENAMED_IDS[id] || id))];
+        return Object.assign(defaultState(), saved);
+      }
     } catch (e) { /* storage unavailable */ }
     return defaultState();
   }
@@ -256,6 +273,13 @@
       return;
     }
     $('#data-date').textContent = `updated ${DATA.generated}`;
+    // Links from the ability pages (/?need=Perfumery) tick that ability.
+    const linked = new URLSearchParams(location.search).get('need');
+    if (DATA.abilities.includes(linked)) {
+      needFor(linked).on = true;
+      saveState();
+      history.replaceState(null, '', location.pathname);
+    }
     $('#ability-filter').append(...DATA.abilities.map(a => el('option', { value: a }, a)));
     bindSettings();
     renderNeeds();
