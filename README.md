@@ -6,7 +6,7 @@ A small web tool for planning your **Homeland** in *Aniimo*. You tell it which H
 - **Your needs:** for each ability, set a minimum level and the number of workers.
 - **Best team:** the fewest Aniimo that meet every need. When two teams are the same size, the one with higher total ability levels wins. The search is exact (branch-and-bound), not a guess.
 - **Prismana toggle:** Prismana forms are rare, so they're **excluded by default**. If a need can only be met by a Prismana form, or allowing Prismana would shrink your team, the calculator tells you.
-- **Unobtainable entries**, such as bosses with no wild spawn, evolution or egg, are shown in the list but never used in teams.
+- **Only Aniimo you can own:** bosses and NPC-only creatures are left out.
 - **"Only use Aniimo I own"**: tick the Aniimo you have in the list and plan with just those.
 - Settings and your owned list are saved in your browser.
 
@@ -57,13 +57,13 @@ The file is only rewritten when the data actually changed. It also prints a summ
 **Fixing wrong data:** don't edit `aniimo.json` directly, since the next scrape would undo it. Put corrections in [`tools/overrides.json`](tools/overrides.json). They're applied after every scrape:
 ```json
 { "patch": {
-    "tuckin-90207": { "unobtainable": true },
+    "lunara": { "unobtainable": true },
     "glacy": { "abilities": { "Water": 3, "Hauling": 3, "Ice": 2 } }
 } }
 ```
-Any field you give replaces the scraped value: `name`, `form`, `prismana`, `unobtainable`, `elements`, or `abilities` (replaces the whole list). Each entry in `aniimo.json` looks like this:
+Any field you give replaces the scraped value: `name`, `form`, `prismana`, `unobtainable`, `elements`, or `abilities` (replaces the whole list). `"unobtainable": true` leaves that Aniimo out of the data. Each entry in `aniimo.json` looks like this:
 ```json
-{"id":"tromber-beach","page":"tromber","name":"Tromber","form":"Beach Form","prismana":false,"unobtainable":false,"elements":["Wind","Water"],"abilities":{"Wind":3,"Water":2}}
+{"id":"tromber-beach","page":"tromber","name":"Tromber","form":"Beach Form","prismana":false,"unobtainable":false,"elements":["Wind","Water"],"abilities":{"Water":2,"Wind":3}}
 ```
 Spotted a mistake? [Open an issue](https://github.com/abyssalsoldier/aniimo-calc/issues).
 
