@@ -95,7 +95,7 @@ $body
 function Format-Row($a, [string]$ability) {
     $label = Enc $a.name
     if ($a.form -and -not ($a.prismana -and $a.form -match '^Prismana( Form)?$')) { $label += "<span class=`"form`"> $(Enc $a.form)</span>" }
-    # The name links to the Aniimo's wiki page
+    # The name links to the Aniimo's AniimoTools page
     if ($a.wiki) { $label = "<a class=`"wiki`" href=`"$(Enc $a.wiki)`" target=`"_blank`" rel=`"noopener`">$label</a>" }
     $tags = ''
     if ($a.prismana) { $tags += '<span class="prismana">Prismana</span>' }

@@ -64,9 +64,9 @@
   }
 
   const displayName = a => a.form ? `${a.name} (${a.form})` : a.name;
-  // The name links to the Aniimo's wiki page (opens in a new tab)
+  // The name links to the Aniimo's AniimoTools page (opens in a new tab)
   const wikiLink = (a, ...children) => a.wiki
-    ? el('a', { class: 'wiki', href: a.wiki, target: '_blank', rel: 'noopener', title: `${displayName(a)} on the wiki` }, ...children)
+    ? el('a', { class: 'wiki', href: a.wiki, target: '_blank', rel: 'noopener', title: `${displayName(a)} on AniimoTools` }, ...children)
     : el('span', null, ...children);
   const abilityClass = name => 'ab-' + name.toLowerCase();
   const icon = name => AniimoIcons.icon(name);

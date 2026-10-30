@@ -24,7 +24,6 @@ $OverridesFile = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFr
 if ($SummaryFile) { $SummaryFile = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($SummaryFile) }
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $Base = 'https://aniimotools.dev'
-$WikiBase = 'https://wiki.aniimo.com'   # official wiki, used for the links on Aniimo names
 $UA = 'Mozilla/5.0 (aniimo-calc data builder)'
 $S = [System.Text.RegularExpressions.RegexOptions]::Singleline
 
@@ -77,15 +76,6 @@ function Get-FormId([string]$name, [string]$form) {
     $id
 }
 
-# Form slugs ("basic-form", "prismana-form", ...) the official wiki has for a dex number;
-# empty when the wiki doesn't list the species (yet) or can't be reached.
-function Get-WikiForms([string]$dex) {
-    if (-not $dex -or -not $script:WikiDex.Contains($dex)) { return @() }
-    try { $html = Get-Html "$WikiBase/item/$dex/basic-form" }
-    catch { $script:WikiFailed += $dex; return @() }
-    @([regex]::Matches($html, "href=`"/item/$dex/([a-z0-9-]+)`"") | ForEach-Object { $_.Groups[1].Value } | Select-Object -Unique)
-}
-
 function Get-Creature([string]$path) {
     $html = Get-Html "$Base$path"
     $html = $html -replace ' data-astro-cid-[a-z0-9]+', ''
@@ -94,9 +84,6 @@ function Get-Creature([string]$path) {
     # Creatures outside the Aniilog (no dex number) are NPC/boss-only and can't be owned
     $dexline = [regex]::Match($html, '<p class="hero__dexline">.*?</p>', $S).Value
     $unobtainable = $dexline -notmatch 'No\.\d'
-    # Main Aniilog number ("No.046"; regional dexes like "Whisperwake Isles No.009" aren't on the wiki)
-    $dex = [regex]::Match($dexline, '<span class="tabular">No\.(\d+)</span>').Groups[1].Value
-    $wikiForms = Get-WikiForms $dex
 
     # Homeland abilities: one kit per form whose kit differs from the default; a single
     # list when the creature has no such forms.
@@ -122,11 +109,8 @@ function Get-Creature([string]$path) {
     foreach ($f in $forms) {
         $key = [string]$f.key
         $form = if ($key) { [System.Net.WebUtility]::HtmlDecode($f.name) } else { $null }
-        # Link to the form's official wiki page, else the species' page, else AniimoTools
-        $wikiForm = if ($form) { ConvertTo-Slug $form } else { 'basic-form' }
-        $wiki = if ($wikiForms -contains $wikiForm) { "$WikiBase/item/$dex/$wikiForm" }
-            elseif ($wikiForms) { "$WikiBase/item/$dex/basic-form" }
-            else { "$Base/creatures/$slug/" }
+        # The name links to this form's tab on the AniimoTools page
+        $wiki = "$Base/creatures/$slug/" + $(if ($key) { '#form=' + [uri]::EscapeDataString($key) })
         [ordered]@{
             id           = Get-FormId $name $form
             page         = $slug
@@ -201,12 +185,6 @@ function Format-Abilities($e) {
 # ---------- main ----------
 
 $script:UnknownAbilities = @()
-$script:WikiFailed = @()
-
-Write-Host 'Fetching wiki index...'
-# Dex numbers the official wiki has pages for (its index links /item/<dex>/basic-form)
-$script:WikiDex = [System.Collections.Generic.HashSet[string]]::new([string[]]@(
-    [regex]::Matches((Get-Html "$WikiBase/"), 'href="/item/(\d+)/basic-form"') | ForEach-Object { $_.Groups[1].Value }))
 
 if ($Only) { $paths = $Only -split ',' | ForEach-Object { "/creatures/$($_.Trim())/" } } else {
     Write-Host 'Fetching creature index...'
@@ -273,8 +251,6 @@ $all = @($all | Where-Object { -not $_.unobtainable } | Sort-Object { $_.name },
 
 $problems = @()
 if ($failed) { $problems += "$($failed.Count) page(s) failed to load: $($failed -join ', ')" }
-if ($script:WikiFailed) { $problems += "$($script:WikiFailed.Count) wiki page(s) failed to load: No.$($script:WikiFailed -join ', No.')" }
-if ($script:WikiDex.Count -lt 50) { $problems += "The wiki index lists only $($script:WikiDex.Count) Aniimo (page layout may have changed)" }
 if ($script:UnknownAbilities) {
     $problems += "Unrecognised ability name(s): $(($script:UnknownAbilities | Select-Object -Unique) -join ', '). If the game added a new ability, add it to `$Abilities in tools/scrape.ps1."
 }
