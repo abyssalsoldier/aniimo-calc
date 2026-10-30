@@ -64,6 +64,10 @@
   }
 
   const displayName = a => a.form ? `${a.name} (${a.form})` : a.name;
+  // The name links to the Aniimo's wiki page (opens in a new tab)
+  const wikiLink = (a, ...children) => a.wiki
+    ? el('a', { class: 'wiki', href: a.wiki, target: '_blank', rel: 'noopener', title: `${displayName(a)} on the wiki` }, ...children)
+    : el('span', null, ...children);
   const abilityClass = name => 'ab-' + name.toLowerCase();
   const icon = name => AniimoIcons.icon(name);
 
@@ -128,7 +132,7 @@
       });
       rows.push(el('tr', { 'data-id': a.id, class: a.unobtainable ? 'unobtainable' : null },
         el('td', null, box),
-        el('td', null, a.name, a.form ? el('span', { class: 'form' }, ' ' + a.form) : null,
+        el('td', null, wikiLink(a, a.name, a.form ? el('span', { class: 'form' }, ' ' + a.form) : null),
           a.prismana ? el('span', { class: 'prismana' }, 'Prismana') : null,
           a.unobtainable ? el('span', { class: 'tag', title: 'No wild spawn, evolution or egg — never used in teams' }, 'Unobtainable') : null),
         el('td', null, a.elements.map(e => el('span', { class: `el ${abilityClass(e)}` }, icon(e), e))),
@@ -226,7 +230,7 @@
     nodes.push(el('ol', { class: 'team' }, res.team.map(t =>
       el('li', null,
         el('div', { class: 'who' },
-          el('strong', null, displayName(t.aniimo)),
+          el('strong', null, wikiLink(t.aniimo, displayName(t.aniimo))),
           t.copies > 1 ? el('span', { class: 'copies' }, `× ${t.copies}`) : null,
           t.aniimo.prismana ? el('span', { class: 'prismana' }, 'Prismana') : null),
         el('div', { class: 'fills' }, 'Fills: ', t.fills.map(f => abilityBadge(f.ability, f.level))))

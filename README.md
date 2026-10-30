@@ -61,9 +61,9 @@ The file is only rewritten when the data actually changed. It also prints a summ
     "glacy": { "abilities": { "Water": 3, "Hauling": 3, "Ice": 2 } }
 } }
 ```
-Any field you give replaces the scraped value: `name`, `form`, `prismana`, `unobtainable`, `elements`, or `abilities` (replaces the whole list). `"unobtainable": true` leaves that Aniimo out of the data. Each entry in `aniimo.json` looks like this:
+Any field you give replaces the scraped value: `name`, `form`, `prismana`, `unobtainable`, `elements`, `abilities` (replaces the whole list), or `wiki` (the page the Aniimo's name links to). `"unobtainable": true` leaves that Aniimo out of the data. Each entry in `aniimo.json` looks like this:
 ```json
-{"id":"tromber-beach","page":"tromber","name":"Tromber","form":"Beach Form","prismana":false,"unobtainable":false,"elements":["Wind","Water"],"abilities":{"Water":2,"Wind":3}}
+{"id":"tromber-beach","page":"tromber","name":"Tromber","form":"Beach Form","prismana":false,"unobtainable":false,"elements":["Wind","Water"],"abilities":{"Water":2,"Wind":3},"wiki":"https://wiki.aniimo.com/item/008/beach-form"}
 ```
 Spotted a mistake? [Open an issue](https://github.com/abyssalsoldier/aniimo-calc/issues).
 

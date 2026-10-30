@@ -93,15 +93,18 @@ $body
 }
 
 function Format-Row($a, [string]$ability) {
+    $label = Enc $a.name
+    if ($a.form -and -not ($a.prismana -and $a.form -match '^Prismana( Form)?$')) { $label += "<span class=`"form`"> $(Enc $a.form)</span>" }
+    # The name links to the Aniimo's wiki page
+    if ($a.wiki) { $label = "<a class=`"wiki`" href=`"$(Enc $a.wiki)`" target=`"_blank`" rel=`"noopener`">$label</a>" }
     $tags = ''
-    if ($a.form -and -not ($a.prismana -and $a.form -eq 'Prismana')) { $tags += "<span class=`"form`"> $(Enc $a.form)</span>" }
     if ($a.prismana) { $tags += '<span class="prismana">Prismana</span>' }
     if ($a.unobtainable) { $tags += '<span class="tag" title="No wild spawn, evolution or egg">Unobtainable</span>' }
     $els = ($a.elements | ForEach-Object { "<span class=`"el ab-$(Get-Slug $_)`">$(Get-Icon $_)$_</span>" }) -join ''
     $others = @($a.abilities.PSObject.Properties | Where-Object { $_.Name -ne $ability } | Sort-Object @{ Expression = { -[int]$_.Value } }, Name)
     $otherHtml = if ($others) { ($others | ForEach-Object { Get-Badge $_.Name ([int]$_.Value) }) -join '' } else { '<span class="muted">None</span>' }
     $cls = if ($a.unobtainable) { ' class="unobtainable"' } else { '' }
-    "          <tr$cls><td>$(Enc $a.name)$tags</td><td>$els</td><td>$otherHtml</td></tr>"
+    "          <tr$cls><td>$label$tags</td><td>$els</td><td>$otherHtml</td></tr>"
 }
 
 $all = @($data.aniimo)
