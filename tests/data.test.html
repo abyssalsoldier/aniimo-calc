@@ -31,6 +31,9 @@
         for (const [ab, lv] of Object.entries(a.abilities)) {
           if (!data.abilities.includes(ab) || lv < 1 || lv > 4) { failed++; lines.push(`FAIL ${a.id}: bad ability ${ab} ${lv}`); }
         }
+        if (!Array.isArray(a.stats) || a.stats.some(s => !['HP', 'ATK', 'REGEN', 'BREAK', 'P.DEF', 'M.DEF'].includes(s))) {
+          failed++; lines.push(`FAIL ${a.id}: bad stats ${JSON.stringify(a.stats)}`);
+        }
       }
       lines.push(`${data.aniimo.length} entries, ${usable.length} usable, ${usable.length - noPrismana.length} Prismana`);
 

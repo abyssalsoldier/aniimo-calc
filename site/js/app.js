@@ -136,7 +136,8 @@
           a.prismana ? el('span', { class: 'prismana' }, 'Prismana') : null,
           a.unobtainable ? el('span', { class: 'tag', title: 'No wild spawn, evolution or egg — never used in teams' }, 'Unobtainable') : null),
         el('td', null, a.elements.map(e => el('span', { class: `el ${abilityClass(e)}` }, icon(e), e))),
-        el('td', null, Object.entries(a.abilities).sort((x, y) => y[1] - x[1]).map(([n, l]) => abilityBadge(n, l)))
+        el('td', null, Object.entries(a.abilities).sort((x, y) => y[1] - x[1]).map(([n, l]) => abilityBadge(n, l))),
+        el('td', null, (a.stats || []).map(s => el('span', { class: 'badge stat', title: `Recommended stat: ${s}` }, s)))
       ));
     }
     tbody.replaceChildren(...rows);

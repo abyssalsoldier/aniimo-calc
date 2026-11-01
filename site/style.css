@@ -121,6 +121,7 @@ input[type=checkbox] { width: 17px; height: 17px; accent-color: var(--accent); }
   color: var(--text);
 }
 .badge b { color: var(--c); }
+.badge.stat { font-weight: 600; font-size: .75rem; }
 .ico {
   width: 1.1em; height: 1.1em; flex: none;
   color: var(--c, currentColor);
@@ -158,9 +159,10 @@ table { width: 100%; border-collapse: collapse; font-size: .92rem; }
 th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
 th { font-size: .8rem; color: var(--muted); font-weight: 600; position: sticky; top: 0; background: var(--card); }
 td:first-child { width: 44px; }
+#aniimo-table th:nth-child(5), #aniimo-table td:nth-child(5) { white-space: nowrap; }
 
-/* Phones: each Aniimo becomes a card. Name on top, then its elements and
-   Homeland abilities together underneath, so nothing hides off-screen. */
+/* Phones: each Aniimo becomes a card. Name on top, then its elements,
+   Homeland abilities and recommended stats underneath, so nothing hides off-screen. */
 @media (max-width: 640px) {
   #aniimo-table thead { display: none; }
   #aniimo-table, #aniimo-table tbody { display: block; }
@@ -174,9 +176,10 @@ td:first-child { width: 44px; }
   #aniimo-table td { border: 0; padding: 0; width: auto; }
   #aniimo-table td:first-child { grid-row: 1 / span 3; padding-top: 2px; }
   #aniimo-table td:nth-child(2) { font-weight: 600; }
-  #aniimo-table td:nth-child(3), #aniimo-table td:nth-child(4) { grid-column: 2; }
+  #aniimo-table td:nth-child(n+3) { grid-column: 2; }
   #aniimo-table td:nth-child(3) { margin-top: 4px; }
-  #aniimo-table td:nth-child(3):empty { display: none; }
+  #aniimo-table td:nth-child(3):empty, #aniimo-table td:nth-child(5):empty { display: none; }
+  #aniimo-table td:nth-child(5):not(:empty)::before { content: "Stats: "; font-size: .8rem; color: var(--muted); }
 }
 
 @media (max-width: 520px) {

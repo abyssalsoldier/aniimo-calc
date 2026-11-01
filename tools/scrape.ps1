@@ -28,6 +28,8 @@ $UA = 'Mozilla/5.0 (aniimo-calc data builder)'
 $S = [System.Text.RegularExpressions.RegexOptions]::Singleline
 
 $Abilities = @('Fire','Water','Grass','Earth','Lightning','Ice','Wind','Dark','Light','Hauling','Artisanship','Leisure','Perfumery')
+# Stat names the build panel can recommend
+$Stats = @('HP', 'ATK', 'REGEN', 'BREAK', 'P.DEF', 'M.DEF')
 # Site/game names that map onto our ability names
 $AbilityAlias = @{ 'carry' = 'Hauling'; 'carrying' = 'Hauling'; 'rock' = 'Earth'; 'electric' = 'Lightning'; 'holy' = 'Light' }
 
@@ -94,6 +96,12 @@ function Get-Creature([string]$path) {
     }
     if (-not $kits.ContainsKey('')) { $kits[''] = Get-Jobs $homeland }
 
+    # Recommended Attributes from the "In game" build panel (the game's own picks, one set
+    # per page, shared by all forms). Pages the site hasn't filled in yet show "–": no stats.
+    $attrs = [regex]::Match($html, '<span class="bds__attrs">(.*?)</span>\s*</a>', $S).Groups[1].Value
+    $stats = @([regex]::Matches($attrs, '<span class="bds__attr">(?:<img[^>]*>)?\s*([^<]+?)\s*</span>') |
+        ForEach-Object { [System.Net.WebUtility]::HtmlDecode($_.Groups[1].Value) })
+
     # Forms come from the page's album data (one entry per form, default first)
     $album = [regex]::Match($html, '<script type="application/json" data-alb-data>(.*?)</script>', $S).Groups[1].Value
     $forms = if ($album) { @(($album | ConvertFrom-Json).D.forms) } else { @() }
@@ -120,6 +128,7 @@ function Get-Creature([string]$path) {
             unobtainable = $unobtainable
             elements     = if ($elementsByKey.ContainsKey($key)) { $elementsByKey[$key] } else { $elementsByKey[''] }
             abilities    = if ($kits.ContainsKey($key)) { $kits[$key] } else { $kits[''] }
+            stats        = $stats
             wiki         = $wiki
         }
     }
@@ -174,6 +183,7 @@ function ConvertTo-Entry($e) {
         unobtainable = [bool]$e.unobtainable
         elements     = @($e.elements | ForEach-Object { [string]$_ })
         abilities    = $abilities
+        stats        = @($e.stats | Where-Object { $_ } | ForEach-Object { [string]$_ })
         wiki         = [string]$e.wiki
     }
 }
@@ -263,6 +273,10 @@ $removed = @($old | Where-Object { $_.id -notin $newIds })
 if ($old.Count -and $removed.Count -gt [Math]::Max(3, $old.Count * 0.03)) {
     $problems += "$($removed.Count) existing entries would disappear, e.g. $(($removed | Select-Object -First 5 | ForEach-Object id) -join ', ')"
 }
+$withStats = @($all | Where-Object { $_.stats.Count })
+if ($all.Count -gt 20 -and -not $withStats) { $problems += 'No entry has recommended stats (page layout may have changed)' }
+$badStats = @($all | Where-Object { @($_.stats | Where-Object { $_ -notin $Stats }).Count } | ForEach-Object { "$($_.id) ($($_.stats -join '/'))" })
+if ($badStats) { $problems += "Unrecognised stat name(s): $($badStats -join ', '). If the game added a stat, add it to `$Stats in tools/scrape.ps1." }
 $dupes = @($newIds | Group-Object | Where-Object Count -gt 1 | ForEach-Object Name)
 if ($dupes) { $problems += "Duplicate ids: $($dupes -join ', ')" }
 
@@ -301,6 +315,7 @@ if ($changed) {
         $what = @()
         if ((Format-Abilities $o) -ne (Format-Abilities $e)) { $what += "abilities $(Format-Abilities $o) -> $(Format-Abilities $e)" }
         if (($o.elements -join '/') -ne ($e.elements -join '/')) { $what += "elements $($o.elements -join '/') -> $($e.elements -join '/')" }
+        if (($o.stats -join '/') -ne ($e.stats -join '/')) { $what += "stats $(if ($o.stats) { $o.stats -join '/' } else { 'none' }) -> $(if ($e.stats) { $e.stats -join '/' } else { 'none' })" }
         foreach ($k in 'name', 'form', 'prismana', 'unobtainable', 'page', 'wiki') { if ("$($o[$k])" -ne "$($e[$k])") { $what += "$k '$($o[$k])' -> '$($e[$k])'" } }
         "- $(& $label $e): $($what -join '; ')"
     }

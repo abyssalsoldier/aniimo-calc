@@ -2,7 +2,7 @@
 
 A small web tool for planning your **Homeland** in *Aniimo*. You tell it which Homeland abilities you need and how many Aniimo your Home can hold, and it works out the smallest team that covers everything.
 
-- **Every Aniimo and form** with its elements and Homeland abilities (Fire, Water, Grass, Earth, Lightning, Ice, Wind, Dark, Light, Hauling, Artisanship, Leisure, Perfumery) and their levels (1–4).
+- **Every Aniimo and form** with its elements and Homeland abilities (Fire, Water, Grass, Earth, Lightning, Ice, Wind, Dark, Light, Hauling, Artisanship, Leisure, Perfumery) and their levels (1–4), plus the game's **recommended stats** to raise (where AniimoTools lists them).
 - **Your needs:** for each ability, set a minimum level and the number of workers.
 - **Best team:** the fewest Aniimo that meet every need. When two teams are the same size, the one with higher total ability levels wins. The search is exact (branch-and-bound), not a guess.
 - **Prismana toggle:** Prismana forms are rare, so they're **excluded by default**. If a need can only be met by a Prismana form, or allowing Prismana would shrink your team, the calculator tells you.
@@ -45,7 +45,7 @@ The roster lives in [`site/data/aniimo.json`](site/data/aniimo.json), one Aniimo
 **Automatic (GitHub Actions):** the [Update Aniimo data](.github/workflows/update-data.yml) workflow re-scrapes every day at 06:17 UTC. If anything changed, it commits the new data with a message listing what was added, changed or removed. Cloudflare Pages then redeploys, so the update is live about a minute later. If nothing changed, it does nothing.
 
 - **To run it now:** go to the repo's **Actions** tab → *Update Aniimo data* → *Run workflow*.
-- **If it fails**, GitHub emails you. The scraper refuses to write when the scrape looks broken: pages that won't load, lots of entries disappearing, entries where nothing could be parsed (usually means aniimotools.dev changed its page layout), or a Homeland ability name it doesn't know (if the game added one, add it to `$Abilities` in `tools/scrape.ps1`). The run log says which. If you've checked the change is genuine, re-run with **force** ticked.
+- **If it fails**, GitHub emails you. The scraper refuses to write when the scrape looks broken: pages that won't load, lots of entries disappearing, entries where nothing could be parsed (usually means aniimotools.dev changed its page layout), a Homeland ability name it doesn't know (if the game added one, add it to `$Abilities` in `tools/scrape.ps1`), a recommended-stat name it doesn't know (add it to `$Stats`), or no recommended stats found at all. The run log says which. If you've checked the change is genuine, re-run with **force** ticked.
 
 **By hand:**
 ```
