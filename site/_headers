@@ -14,6 +14,9 @@
 
 # Scripts and styles change with the site: browsers recheck them on every load (a cheap
 # "not modified" when unchanged), so a deploy never leaves visitors running old code.
+# Needs Cloudflare dashboard > Caching > Configuration > Browser Cache TTL set to
+# "Respect Existing Headers"; otherwise Cloudflare raises this to its 4-hour default. Until
+# then, bump the ?v= on the asset links in index.html whenever a script or style changes.
 /js/*
   Cache-Control: public, max-age=0, must-revalidate
 /style.css
