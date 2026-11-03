@@ -18,6 +18,16 @@
   for (const n of ['flamerion', 'flutternym', 'glacy', 'gracewing', 'pomawk', 'pomegg', 'pranky',
     'skippy', 'sparki']) RENAMED_IDS[`${n}-sea-of-flowers`] = `${n}-flowerfield`;
 
+  // One-of-a-kind Aniimo: you can only ever have one (one starter of the two; each
+  // Legendary once). Left out of teams unless ticked, and never used more than once.
+  const SPECIAL = [
+    { id: 'lunara', kind: 'Starter' },
+    { id: 'helion', kind: 'Starter' },
+    { id: 'somniwing', kind: 'Legendary' },
+    { id: 'irisalis', kind: 'Legendary' },
+  ];
+  const SPECIAL_KIND = new Map(SPECIAL.map(s => [s.id, s.kind]));
+
   let DATA = null;
   let state = loadState();
 
@@ -26,6 +36,7 @@
       needs: {},            // ability -> { on, minLevel, count }
       maxCount: 45,
       allowPrismana: false,
+      allowSpecial: {},     // one-of-a-kind aniimo id -> true when it may be used
       onlyOwned: false,
       multiRole: true,
       allowDupes: true,
@@ -134,6 +145,7 @@
         el('td', null, box),
         el('td', null, wikiLink(a, a.name, a.form ? el('span', { class: 'form' }, ' ' + a.form) : null),
           a.prismana ? el('span', { class: 'prismana' }, 'Prismana') : null,
+          a.unique ? el('span', { class: 'tag', title: 'You can only ever have one — tick it under “Use one-of-a-kind Aniimo” to plan with it' }, a.unique) : null,
           a.unobtainable ? el('span', { class: 'tag', title: 'No wild spawn, evolution or egg — never used in teams' }, 'Unobtainable') : null),
         el('td', null, a.elements.map(e => el('span', { class: `el ${abilityClass(e)}` }, icon(e), e))),
         el('td', null, Object.entries(a.abilities).sort((x, y) => y[1] - x[1]).map(([n, l]) => abilityBadge(n, l))),
@@ -159,7 +171,9 @@
   function pool(includePrismana) {
     const owned = new Set(state.owned);
     return DATA.aniimo.filter(a => !a.unobtainable &&
-      (includePrismana || !a.prismana) && (!state.onlyOwned || owned.has(a.id)));
+      (includePrismana || !a.prismana) &&
+      (!a.unique || state.allowSpecial[a.id]) &&
+      (!state.onlyOwned || owned.has(a.id)));
   }
 
   function activeRequirements() {
@@ -202,10 +216,13 @@
       nodes.push(el('ul', null, items.map(u => {
         const prismanaFix = withP && !withP.unfillable.some(x => x.ability === u.ability) &&
           (withP.status !== 'unfillable' || withP.unfillable.length > 0);
+        const locked = DATA.aniimo.filter(a => a.unique && !state.allowSpecial[a.id] &&
+          (a.abilities[u.ability] || 0) >= u.minLevel).map(displayName);
         return el('li', null,
           `${u.ability} Lv ${u.minLevel}+ × ${u.count}`,
           u.available ? ` — only ${u.available} different Aniimo qualify` : ' — no Aniimo qualifies',
           prismanaFix ? el('span', { class: 'hint' }, ' · only reachable with Prismana forms — enable “Allow Prismana forms” to use') : null,
+          locked.length ? el('span', { class: 'hint' }, ` · ${locked.join(', ')} also qualif${locked.length > 1 ? 'y' : 'ies'} if you have ${locked.length > 1 ? 'them' : 'it'} — tick under “Use one-of-a-kind Aniimo”`) : null,
           state.onlyOwned ? el('span', { class: 'hint' }, ' · you’re limited to Aniimo you own') : null);
       })));
       out.replaceChildren(...nodes);
@@ -252,6 +269,18 @@
     };
     bind('#max-count', 'maxCount', 'number');
     bind('#allow-prismana', 'allowPrismana', 'check');
+
+    $('#special-list').replaceChildren(...SPECIAL
+      .map(s => DATA.aniimo.find(a => a.id === s.id))
+      .filter(Boolean)
+      .map(a => {
+        const box = el('input', { type: 'checkbox', checked: !!state.allowSpecial[a.id] });
+        box.addEventListener('change', () => {
+          if (box.checked) state.allowSpecial[a.id] = true; else delete state.allowSpecial[a.id];
+          recalc();
+        });
+        return el('label', { class: 'check' }, box, ` ${displayName(a)} `, el('small', null, `(${a.unique})`));
+      }));
     bind('#only-owned', 'onlyOwned', 'check');
     bind('#multi-role', 'multiRole', 'check');
     bind('#allow-dupes', 'allowDupes', 'check');
@@ -272,6 +301,8 @@
     try {
       const res = await fetch('data/aniimo.json');
       DATA = await res.json();
+      // a.unique holds the kind ("Starter"/"Legendary"); the solver treats it as "only one copy".
+      for (const a of DATA.aniimo) if (SPECIAL_KIND.has(a.id)) a.unique = SPECIAL_KIND.get(a.id);
       await iconsReady;
     } catch (e) {
       $('#result').replaceChildren(el('p', { class: 'bad' }, 'Could not load the Aniimo list. Please reload the page.'));

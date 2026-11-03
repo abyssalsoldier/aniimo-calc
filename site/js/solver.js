@@ -44,15 +44,19 @@
     }
     let types = [...typeByKey.values()];
     for (const t of types) {
-      t.members.sort((x, y) => (!!x.prismana - !!y.prismana) ||displayName(x).localeCompare(displayName(y)));
-      t.cap = opt.allowDuplicates ? sumNeeds : Math.min(t.members.length, sumNeeds);
+      // Unique Aniimo (a.unique: you can only ever have one) go last, so repeats use a non-unique member.
+      t.members.sort((x, y) => (!!x.unique - !!y.unique) || (!!x.prismana - !!y.prismana) ||
+        displayName(x).localeCompare(displayName(y)));
+      t.repeatable = opt.allowDuplicates && t.members.some(m => !m.unique);
+      t.cap = t.repeatable ? sumNeeds : Math.min(t.members.length, sumNeeds);
     }
 
     // Requirements no candidate (or not enough candidates) can meet.
     const unfillable = [];
     reqs.forEach((r, i) => {
-      const available = types.reduce((s, t) => s + (t.lv[i] > 0 ? t.members.length : 0), 0);
-      if (available === 0 || (!opt.allowDuplicates && available < r.count)) {
+      const meets = types.filter(t => t.lv[i] > 0);
+      const available = meets.reduce((s, t) => s + t.members.length, 0);
+      if (available === 0 || (!meets.some(t => t.repeatable) && available < r.count)) {
         unfillable.push({ ability: r.ability, minLevel: r.minLevel, count: r.count, available });
       }
     });
