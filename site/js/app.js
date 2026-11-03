@@ -37,6 +37,7 @@
       maxCount: 45,
       allowPrismana: false,
       allowSpecial: {},     // one-of-a-kind aniimo id -> true when it may be used
+      excluded: [],         // aniimo ids the player chose "Don't use" on (e.g. can't get them)
       onlyOwned: false,
       multiRole: true,
       allowDupes: true,
@@ -49,7 +50,9 @@
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
       if (saved) {
-        if (Array.isArray(saved.owned)) saved.owned = [...new Set(saved.owned.map(id => RENAMED_IDS[id] || id))];
+        for (const k of ['owned', 'excluded']) {
+          if (Array.isArray(saved[k])) saved[k] = [...new Set(saved[k].map(id => RENAMED_IDS[id] || id))];
+        }
         return Object.assign(defaultState(), saved);
       }
     } catch (e) { /* storage unavailable */ }
@@ -126,6 +129,7 @@
     const q = $('#search').value.trim().toLowerCase();
     const ability = $('#ability-filter').value;
     const owned = new Set(state.owned);
+    const excluded = new Set(state.excluded);
     const tbody = $('#aniimo-table tbody');
     const rows = [];
 
@@ -146,7 +150,11 @@
         el('td', null, wikiLink(a, a.name, a.form ? el('span', { class: 'form' }, ' ' + a.form) : null),
           a.prismana ? el('span', { class: 'prismana' }, 'Prismana') : null,
           a.unique ? el('span', { class: 'tag', title: 'You can only ever have one — tick it under “Use one-of-a-kind Aniimo” to plan with it' }, a.unique) : null,
-          a.unobtainable ? el('span', { class: 'tag', title: 'No wild spawn, evolution or egg — never used in teams' }, 'Unobtainable') : null),
+          a.unobtainable ? el('span', { class: 'tag', title: 'No wild spawn, evolution or egg — never used in teams' }, 'Unobtainable') : null,
+          excluded.has(a.id) ? el('button', {
+            type: 'button', class: 'tag tag-btn', title: 'You chose “Don’t use” for this one. Click to plan with it again',
+            onclick: () => include(a.id),
+          }, 'Not used ✕') : null),
         el('td', null, a.elements.map(e => el('span', { class: `el ${abilityClass(e)}` }, icon(e), e))),
         el('td', null, Object.entries(a.abilities).sort((x, y) => y[1] - x[1]).map(([n, l]) => abilityBadge(n, l))),
         el('td', null, (a.stats || []).map(s => el('span', { class: 'badge stat', title: `Recommended stat: ${s}` }, s)))
@@ -170,7 +178,8 @@
 
   function pool(includePrismana) {
     const owned = new Set(state.owned);
-    return DATA.aniimo.filter(a => !a.unobtainable &&
+    const excluded = new Set(state.excluded);
+    return DATA.aniimo.filter(a => !a.unobtainable && !excluded.has(a.id) &&
       (includePrismana || !a.prismana) &&
       (!a.unique || state.allowSpecial[a.id]) &&
       (!state.onlyOwned || owned.has(a.id)));
@@ -225,6 +234,7 @@
           locked.length ? el('span', { class: 'hint' }, ` · ${locked.join(', ')} also qualif${locked.length > 1 ? 'y' : 'ies'} if you have ${locked.length > 1 ? 'them' : 'it'} — tick under “Use one-of-a-kind Aniimo”`) : null,
           state.onlyOwned ? el('span', { class: 'hint' }, ' · you’re limited to Aniimo you own') : null);
       })));
+      nodes.push(excludedNote());
       out.replaceChildren(...nodes);
       return;
     }
@@ -245,15 +255,75 @@
       nodes.push(el('p', { class: 'hint' }, 'This is the smallest possible team. A same-size team with slightly higher levels might exist.'));
     }
 
+    const candidates = pool(state.allowPrismana);
+    const inTeam = new Set(res.team.map(t => t.aniimo.id));
     nodes.push(el('ol', { class: 'team' }, res.team.map(t =>
       el('li', null,
         el('div', { class: 'who' },
           el('strong', null, wikiLink(t.aniimo, displayName(t.aniimo))),
           t.copies > 1 ? el('span', { class: 'copies' }, `× ${t.copies}`) : null,
-          t.aniimo.prismana ? el('span', { class: 'prismana' }, 'Prismana') : null),
-        el('div', { class: 'fills' }, 'Fills: ', t.fills.map(f => abilityBadge(f.ability, f.level))))
+          t.aniimo.prismana ? el('span', { class: 'prismana' }, 'Prismana') : null,
+          el('button', {
+            type: 'button', class: 'link dont-use',
+            title: `Plan without ${displayName(t.aniimo)}, e.g. if you can’t get it`,
+            onclick: () => exclude(t.aniimo.id),
+          }, 'Don’t use')),
+        el('div', { class: 'fills' }, 'Fills: ', t.fills.map(f => abilityBadge(f.ability, f.level))),
+        alternatives(t, reqs, candidates, inTeam))
     )));
+    nodes.push(excludedNote());
     out.replaceChildren(...nodes);
+  }
+
+  // Drop-in replacements for one team entry: Aniimo that reach the needed level in every
+  // ability this one fills, so swapping one in keeps the team the same size.
+  const ALT_LIMIT = 12;
+  function alternatives(entry, reqs, candidates, inTeam) {
+    const needs = entry.fills.map(f => reqs.find(r => r.ability === f.ability));
+    const alts = candidates
+      .filter(a => a.id !== entry.aniimo.id && !(a.unique && inTeam.has(a.id)) &&
+        needs.every(r => (a.abilities[r.ability] || 0) >= r.minLevel))
+      .map(a => ({ a, score: needs.reduce((s, r) => s + a.abilities[r.ability], 0) }))
+      .sort((x, y) => (y.score - x.score) || (inTeam.has(x.a.id) - inTeam.has(y.a.id)) ||
+        (!!x.a.prismana - !!y.a.prismana) || displayName(x.a).localeCompare(displayName(y.a)));
+    if (!alts.length) {
+      return el('div', { class: 'alts muted' }, 'No other Aniimo covers all of this on its own. “Don’t use” rebuilds the team without it.');
+    }
+    const shown = alts.slice(0, ALT_LIMIT);
+    return el('details', { class: 'alts' },
+      el('summary', null, `${alts.length} alternative${alts.length > 1 ? 's' : ''}`),
+      el('ul', null, shown.map(({ a }) => el('li', null,
+        wikiLink(a, displayName(a)),
+        a.prismana ? el('span', { class: 'prismana' }, 'Prismana') : null,
+        inTeam.has(a.id) ? el('span', { class: 'tag' }, 'in team') : null,
+        ' ', needs.map(r => abilityBadge(r.ability, a.abilities[r.ability]))))),
+      alts.length > shown.length ? el('p', { class: 'muted' }, `and ${alts.length - shown.length} more`) : null);
+  }
+
+  function exclude(id) {
+    if (!state.excluded.includes(id)) state.excluded = [...state.excluded, id];
+    renderRoster();
+    recalc();
+  }
+
+  function include(id) {
+    state.excluded = state.excluded.filter(x => x !== id);
+    renderRoster();
+    recalc();
+  }
+
+  // "Not using: Hoptail (use again)" so a "Don't use" can always be undone.
+  function excludedNote() {
+    const list = state.excluded.map(id => DATA.aniimo.find(a => a.id === id)).filter(Boolean);
+    if (!list.length) return null;
+    return el('p', { class: 'excluded' }, 'Not using: ', list.map((a, i) => [
+      i ? ', ' : null,
+      displayName(a), ' ',
+      el('button', { type: 'button', class: 'link', onclick: () => include(a.id) }, '(use again)'),
+    ]).flat(), list.length > 1 ? [' · ', el('button', {
+      type: 'button', class: 'link',
+      onclick: () => { state.excluded = []; renderRoster(); recalc(); },
+    }, 'use all again')] : null);
   }
 
   // ---------- Wiring ----------

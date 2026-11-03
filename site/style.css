@@ -113,6 +113,15 @@ input[type=checkbox] { width: 17px; height: 17px; accent-color: var(--accent); }
 .who { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .fills { margin-top: 4px; font-size: .9rem; color: var(--muted); }
 .copies { font-weight: 700; }
+.dont-use { margin-left: auto; font-size: .85rem; }
+.alts { margin-top: 4px; font-size: .9rem; }
+.alts summary { cursor: pointer; color: var(--accent); width: max-content; }
+.alts ul { margin: 6px 0 2px; padding-left: 18px; }
+.team .alts li { padding: 1px 0; background: none; border-radius: 0; }
+.alts p { margin: 2px 0 0 18px !important; }
+#result p.excluded { margin-top: 12px; color: var(--muted); font-size: .9rem; }
+.tag-btn { background: none; cursor: pointer; font: inherit; font-size: .72rem; }
+.tag-btn:hover { color: var(--accent); }
 
 /* Badges */
 .badge, .el {
