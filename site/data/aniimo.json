@@ -1,6 +1,6 @@
 {
   "source": "https://aniimotools.dev/creatures/",
-  "generated": "2026-11-01",
+  "generated": "2026-11-13",
   "abilities": ["Fire","Water","Grass","Earth","Lightning","Ice","Wind","Dark","Light","Hauling","Artisanship","Leisure","Perfumery"],
   "aniimo": [
     {"id":"bailite","page":"bailite","name":"Bailite","form":null,"prismana":false,"unobtainable":false,"elements":["Earth"],"abilities":{"Earth":3,"Hauling":3},"stats":["ATK","P.DEF"],"wiki":"https://aniimotools.dev/creatures/bailite/"},
@@ -30,7 +30,7 @@
     {"id":"chirpi-beach","page":"chirpi","name":"Chirpi","form":"Beach Form","prismana":false,"unobtainable":false,"elements":["Wind","Water"],"abilities":{"Water":1,"Wind":1},"stats":[],"wiki":"https://aniimotools.dev/creatures/chirpi/#form=highland-form"},
     {"id":"chirpi-highland","page":"chirpi","name":"Chirpi","form":"Highland Form","prismana":false,"unobtainable":false,"elements":["Wind","Grass"],"abilities":{"Grass":1,"Wind":1},"stats":[],"wiki":"https://aniimotools.dev/creatures/chirpi/#form=mountain-woods-form"},
     {"id":"coinwisp","page":"coinwisp","name":"Coinwisp","form":null,"prismana":false,"unobtainable":false,"elements":["Dark"],"abilities":{"Dark":1,"Leisure":1},"stats":[],"wiki":"https://aniimotools.dev/creatures/coinwisp/"},
-    {"id":"coraliz","page":"coraliz","name":"Coraliz","form":null,"prismana":false,"unobtainable":false,"elements":["Earth","Water"],"abilities":{"Water":1,"Earth":1,"Hauling":1},"stats":["REGEN","ATK"],"wiki":"https://aniimotools.dev/creatures/coraliz/"},
+    {"id":"coraliz","page":"coraliz","name":"Coraliz","form":null,"prismana":false,"unobtainable":false,"elements":["Earth","Water"],"abilities":{"Water":2,"Earth":3,"Hauling":3},"stats":["REGEN","ATK"],"wiki":"https://aniimotools.dev/creatures/coraliz/"},
     {"id":"coraliz-rainfall","page":"coraliz","name":"Coraliz","form":"Rainfall Form","prismana":false,"unobtainable":false,"elements":["Earth"],"abilities":{"Earth":1,"Hauling":1},"stats":["REGEN","ATK"],"wiki":"https://aniimotools.dev/creatures/coraliz/#form=rainstorm-form"},
     {"id":"cornet","page":"cornet","name":"Cornet","form":null,"prismana":false,"unobtainable":false,"elements":["Wind"],"abilities":{"Wind":3},"stats":["ATK","REGEN"],"wiki":"https://aniimotools.dev/creatures/cornet/"},
     {"id":"cornet-beach","page":"cornet","name":"Cornet","form":"Beach Form","prismana":false,"unobtainable":false,"elements":["Wind","Water"],"abilities":{"Water":2,"Wind":3},"stats":["ATK","REGEN"],"wiki":"https://aniimotools.dev/creatures/cornet/#form=highland-form"},
