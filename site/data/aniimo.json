@@ -1,6 +1,6 @@
 {
   "source": "https://aniimotools.dev/creatures/",
-  "generated": "2026-11-13",
+  "generated": "2026-11-17",
   "abilities": ["Fire","Water","Grass","Earth","Lightning","Ice","Wind","Dark","Light","Hauling","Artisanship","Leisure","Perfumery"],
   "aniimo": [
     {"id":"bailite","page":"bailite","name":"Bailite","form":null,"prismana":false,"unobtainable":false,"elements":["Earth"],"abilities":{"Earth":3,"Hauling":3},"stats":["ATK","P.DEF"],"wiki":"https://aniimotools.dev/creatures/bailite/"},
@@ -96,7 +96,6 @@
     {"id":"grizbo-prismana","page":"grizbo","name":"Grizbo","form":"Prismana Form","prismana":true,"unobtainable":false,"elements":["Earth","Dark"],"abilities":{"Earth":4,"Dark":3,"Hauling":4},"stats":["ATK","REGEN"],"wiki":"https://aniimotools.dev/creatures/grizbo/#form=prismana-form"},
     {"id":"helgon","page":"helgon","name":"Helgon","form":null,"prismana":false,"unobtainable":false,"elements":["Wind"],"abilities":{"Wind":3,"Hauling":3},"stats":["BREAK","P.DEF"],"wiki":"https://aniimotools.dev/creatures/helgon/"},
     {"id":"helgon-mountain","page":"helgon","name":"Helgon","form":"Mountain Form","prismana":false,"unobtainable":false,"elements":["Wind"],"abilities":{"Wind":3,"Hauling":3},"stats":["BREAK","P.DEF"],"wiki":"https://aniimotools.dev/creatures/helgon/#form=highland-form"},
-    {"id":"helion","page":"helion","name":"Helion","form":null,"prismana":false,"unobtainable":false,"elements":["Light"],"abilities":{"Light":3,"Hauling":3},"stats":["ATK","REGEN"],"wiki":"https://aniimotools.dev/creatures/helion/"},
     {"id":"helmut","page":"helmut","name":"Helmut","form":null,"prismana":false,"unobtainable":false,"elements":["Dark"],"abilities":{"Dark":1,"Hauling":1},"stats":[],"wiki":"https://aniimotools.dev/creatures/helmut/"},
     {"id":"helmut-snowfield","page":"helmut","name":"Helmut","form":"Snowfield Form","prismana":false,"unobtainable":false,"elements":["Dark","Ice"],"abilities":{"Ice":1,"Dark":1,"Hauling":1},"stats":[],"wiki":"https://aniimotools.dev/creatures/helmut/#form=highland-form"},
     {"id":"helmut-timberline","page":"helmut","name":"Helmut","form":"Timberline Form","prismana":false,"unobtainable":false,"elements":["Dark"],"abilities":{"Dark":1,"Hauling":1},"stats":[],"wiki":"https://aniimotools.dev/creatures/helmut/#form=mountain-woods-form"},
@@ -151,7 +150,6 @@
     {"id":"luminelle","page":"luminelle","name":"Luminelle","form":null,"prismana":false,"unobtainable":false,"elements":["Lightning"],"abilities":{"Lightning":3,"Artisanship":3},"stats":["ATK","HP"],"wiki":"https://aniimotools.dev/creatures/luminelle/"},
     {"id":"luminelle-prismana","page":"luminelle","name":"Luminelle","form":"Prismana Form","prismana":true,"unobtainable":false,"elements":["Lightning","Light"],"abilities":{"Lightning":4,"Light":3,"Artisanship":4},"stats":["ATK","HP"],"wiki":"https://aniimotools.dev/creatures/luminelle/#form=prismana-form"},
     {"id":"luminelle-rainfall","page":"luminelle","name":"Luminelle","form":"Rainfall Form","prismana":false,"unobtainable":false,"elements":["Lightning","Water"],"abilities":{"Water":2,"Lightning":3,"Artisanship":3},"stats":["ATK","HP"],"wiki":"https://aniimotools.dev/creatures/luminelle/#form=rainstorm-form"},
-    {"id":"lunara","page":"lunara","name":"Lunara","form":null,"prismana":false,"unobtainable":false,"elements":["Light"],"abilities":{"Light":3,"Hauling":3},"stats":["ATK","REGEN"],"wiki":"https://aniimotools.dev/creatures/lunara/"},
     {"id":"magmarex","page":"magmarex","name":"Magmarex","form":null,"prismana":false,"unobtainable":false,"elements":["Fire","Earth"],"abilities":{"Fire":3,"Earth":2,"Hauling":3},"stats":["BREAK","HP"],"wiki":"https://aniimotools.dev/creatures/magmarex/"},
     {"id":"magmarex-prismana","page":"magmarex","name":"Magmarex","form":"Prismana Form","prismana":true,"unobtainable":false,"elements":["Fire","Dark"],"abilities":{"Fire":4,"Dark":3,"Hauling":4},"stats":["BREAK","HP"],"wiki":"https://aniimotools.dev/creatures/magmarex/#form=prismana-form"},
     {"id":"melloblum","page":"melloblum","name":"Melloblum","form":null,"prismana":false,"unobtainable":false,"elements":["Grass"],"abilities":{"Grass":3,"Artisanship":3},"stats":["ATK","HP"],"wiki":"https://aniimotools.dev/creatures/melloblum/"},
